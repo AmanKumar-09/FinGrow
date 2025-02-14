@@ -15,7 +15,7 @@ import Spline from '@splinetool/react-spline';
 const Body = () => {
   return (
     <>
-      <Header />
+     
       <div className='px-32  mt-5'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-3 '>
           <div className='  h-96 gap-2 rounded-xl p-6 text-center'>
@@ -53,7 +53,7 @@ const Body = () => {
 
 
       </div>
-      <Footer />
+      
       
 
     </>

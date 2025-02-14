@@ -4,7 +4,7 @@ import logo from "../assets/img/Fingrow.png"
 const Footer = () => {
   return (
     <>
-    <div className='h-60 bg-yellow-200  grid grid-cols-4'>
+    <div className='h-60   grid grid-cols-4'>
       <div>
         <img className='w-44' src={logo} alt="" />
       </div>

@@ -1,16 +1,17 @@
 import { useState } from 'react'
 
 import './App.css'
-import Body from './Components/Body'
+import { Outlet } from 'react-router-dom'
+
+import Header from './Components/Header.jsx'
 
 function App() {
 
   return (
     <>
-    <Body />
-    <div>
-      
-    </div>
+    <Header />
+    <Outlet/>
+    
     </>
   )
 }
