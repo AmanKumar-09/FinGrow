@@ -3,7 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 // import Faq from '../Utils/Faq';
 
-import  FAQ from "../Utils/Faq"
+// import  FAQ from "../Utils/Faq"
 
 // import {Spline} from '../Utils/Spline'
 // import {SplinePhone} from '../Utils/SplinePhone'
@@ -49,7 +49,7 @@ const Body = () => {
 
         {/* frequently ask question  */}
 
-        <FAQ/>
+       
 
 
       </div>
