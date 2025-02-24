@@ -3,7 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 // import Faq from '../Utils/Faq';
 
-import  FAQ from "../Utils/Faq"
+// import  FAQ from "../Utils/Faq"
 
 // import {Spline} from '../Utils/Spline'
 // import {SplinePhone} from '../Utils/SplinePhone'
@@ -15,7 +15,7 @@ import Spline from '@splinetool/react-spline';
 const Body = () => {
   return (
     <>
-      <Header />
+     
       <div className='px-32  mt-5'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-3 '>
           <div className='  h-96 gap-2 rounded-xl p-6 text-center'>
@@ -49,11 +49,11 @@ const Body = () => {
 
         {/* frequently ask question  */}
 
-        <FAQ/>
+       
 
 
       </div>
-      <Footer />
+      
       
 
     </>
