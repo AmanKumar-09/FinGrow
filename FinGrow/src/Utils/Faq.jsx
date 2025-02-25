@@ -1,6 +1,3 @@
-
-
-
 import { useState } from "react";
 
 const faqs = [
@@ -18,23 +15,26 @@ const FAQ = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto mt-9 p-4">
-      <h2 className="text-2xl font-bold  mb-6">Frequently Asked Questions</h2>
-      <div className="space-y-4">
-        {faqs.map((faq, index) => (
-          <div key={index} className="border-b pb-2">
-            <button 
-              className="w-full text-left flex justify-between items-center text-md font-medium py-2"
-              onClick={() => toggleFAQ(index)}
-            >
-              {faq.question}
-              <span className="text-xl">{activeIndex === index ? "−" : "+"}</span>
-            </button>
-            {activeIndex === index && (
-              <p className="text-gray-600 mt-2">{faq.answer}</p>
-            )}
-          </div>
-        ))}
+    <div className="flex flex-col items-center justify-center py-10">
+      <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+      
+      <div className="w-[80vw]">
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div key={index} className="border-b pb-2">
+              <button 
+                className="w-full text-left flex justify-between items-center text-md font-medium py-2"
+                onClick={() => toggleFAQ(index)}
+              >
+                {faq.question}
+                <span className="text-xl">{activeIndex === index ? "−" : "+"}</span>
+              </button>
+              {activeIndex === index && (
+                <p className="text-gray-600 mt-2">{faq.answer}</p>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
