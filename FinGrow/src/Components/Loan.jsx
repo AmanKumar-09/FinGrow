@@ -1,8 +1,12 @@
 import React from 'react'
+import Crousal from '../Utils/Crousal'
 
 function Loan() {
   return (
-    <div>Loan</div>
+    <div>
+      <Crousal />
+      hello
+    </div>
   )
 }
 
