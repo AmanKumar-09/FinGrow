@@ -9,7 +9,7 @@ import bodyimg2 from "../assets/img/bodyimg2.png"
 // import {Spline} from '../Utils/Spline'
 // import {SplinePhone} from '../Utils/SplinePhone'
 
-import Spline from '@splinetool/react-spline';
+
 
 
 
