@@ -81,7 +81,7 @@ const Header = () => {
 
     return (
         <>
-            <div className='flex justify-between pb-5 shadow-md'>
+            <div className='flex justify-between pb-5 shadow-md '>
                 <div>
                     <img className='w-40' src={logo} alt="logo" />
                 </div>
