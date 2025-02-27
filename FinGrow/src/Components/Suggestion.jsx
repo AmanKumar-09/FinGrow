@@ -2,7 +2,7 @@ import React from 'react'
 
 function Suggestion() {
   return (
-    <div className='min-h-secreen flex justify-center items-center bg-gradient-to-r from-blue-500 to-indigo-600'>
+    <div className='min-h-secreen flex justify-center items-center bg-gradient-to-r '>
         <div className='w-full my-4 max-w-lg bg-white shadow-lg rounded-lg p-6   mx-auto   '>
           <h2 className='text-2xl font-bold text-center text-gray-800 mb-5'>
             Financial Suggestion Form

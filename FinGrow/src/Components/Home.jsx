@@ -14,7 +14,7 @@ function Home() {
      <Carousel/>
      <News/>
      <Faq/>
-     <Footer/>
+     
      </>
   )
 }

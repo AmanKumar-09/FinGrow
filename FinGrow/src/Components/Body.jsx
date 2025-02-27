@@ -24,8 +24,11 @@ const Body = () => {
             <img src={img3d} className='h-full w-full object-cover' alt="" />
           </div>
           <div className=' gap-2 rounded p-6  pt-16'>
-            <h1 className='text-xl font-bold'>We are growing n how!</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum reprehenderit, nulla voluptas id ratione debitis aspernatur officia consequuntur facilis quaerat ullam at libero earum voluptatem facere quas maxime a iste animi amet officiis nemo dignissimos accusantium sapiente. Cumque, distinctio illo quia alias aut esse quidem!</p>
+            <h1 className='text-xl font-bold'>Empowering Your Financial Growth!</h1>
+            <p>Take control of your financial future with smart investment insights, instant loan options,
+               and expert financial planning. Whether you're looking to grow your wealth, manage your expenses, 
+               or lend money to earn interest, our platform provides the best solutions tailored to your needs.
+                Join us to make informed financial decisions with ease!</p>
             <button className='bg-yellow-500 py-1 px-3 rounded-xl mt-2'>Know Us</button>
           </div>
         </div>
@@ -35,12 +38,11 @@ const Body = () => {
 
         <div className='grid grid-cols-1 md:grid-cols-2 mt- gap-3 pt-8'>
           <div className=' gap-2 rounded p-6  pt-16'>
-            <h1 className='text-xl font-bold'>Getting started with personalize financial planing !</h1>
-            <ol>
-              <li>one</li>
-              <li>two</li>
-              <li>three</li>
-            </ol>
+            <h1 className='text-xl font-bold'>Personalized Financial Planning Made Easy!</h1>
+           <p>Financial success starts with a solid plan! Our platform helps you track your income, 
+            manage expenses, and discover smart saving opportunities. Get personalized insights 
+            on budgeting, debt management, and investment strategies that suit your lifestyle.
+             Start your journey to financial freedom today!</p>
             <button className='bg-yellow-500 py-1 px-3 rounded-xl mt-2'>Know Us</button>
           </div>
           <div className='h-96 gap-2 rounded p-6 text-center'>

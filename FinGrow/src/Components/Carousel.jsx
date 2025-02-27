@@ -14,7 +14,8 @@ function Carousel() {
   const links = [
     {
       src:"https://cdn-icons-png.flaticon.com/512/4466/4466510.png",
-      line1:"Instant Approval & Disbursal"
+      line1:"Instant Approval & Disbursal",
+      line2:"Get instant loan approvals and quick disbursal directly into your bank account. No long paperwork, just a seamless experience!"
     },
     {
       src:"https://cdn-icons-png.flaticon.com/512/1041/1041916.png",
@@ -23,24 +24,25 @@ function Carousel() {
     },
     {
       src:"https://cdn-icons-png.flaticon.com/512/9512/9512854.png",
-      line1:"User-friendly"
+      line1:"User-friendly Interface",
+      line2 : "Our easy-to-use app ensures a smooth experience for beginners and experts alike, making financial management effortless."
     },
 
   ]
 
   return (
-    <div className="flex flex-col items-center justify-center py-10 bg-white">
+    <div className="flex  flex-col items-center justify-center py-10 bg-white">
       {/* Heading */}
       <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">
         <span className="border-b-2 border-yellow-400">Join the millions</span> who have said <span className="text-yellow-500">"YES"</span> to FinGrow
       </h2>
 
       {/* Carousel Container */}
-      <div className="relative w-full max-w-3xl ">
+      <div className="relative  py-4 w-full max-w-3xl ">
         {/* Scrollable Cards (Hidden Scrollbar) */}
         <div
           ref={scrollRef}
-          className="flex  space-x-4 overflow-x-scroll no-scrollbar scroll-smooth px-4"
+          className="flex  pb-5 space-x-4 overflow-x-scroll no-scrollbar scroll-smooth px-4"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }} // Hide scrollbar for Firefox & IE
         >
            
