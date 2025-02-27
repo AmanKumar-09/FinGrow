@@ -5,7 +5,7 @@ const Signup = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r border ">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -42,7 +42,7 @@ const Signup = () => {
               <label className="text-gray-700 font-medium">Full Name</label>
               <input
                 type="text"
-                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 "
               />
             </motion.div>
           )}
@@ -55,7 +55,7 @@ const Signup = () => {
             <label className="text-gray-700 font-medium">Email</label>
             <input
               type="email"
-              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 "
             />
           </motion.div>
 
@@ -67,7 +67,7 @@ const Signup = () => {
             <label className="text-gray-700 font-medium">Password</label>
             <input
               type="password"
-              className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2 "
             />
           </motion.div>
 
@@ -82,7 +82,7 @@ const Signup = () => {
               </label>
               <input
                 type="password"
-                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2 "
               />
             </motion.div>
           )}
@@ -91,7 +91,7 @@ const Signup = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition"
+            className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition"
           >
             {isSignUp ? "Sign Up" : "Sign In"}
           </motion.button>
