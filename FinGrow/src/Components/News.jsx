@@ -27,7 +27,7 @@ const link = [
   },
   {
     line1: "AisaTechDaily",
-    line2: "58% of Indians who utilized instant loan apps in the past two years were charged annual interest rates exceeding 25%",
+    line2: "58% of Indians using instant loan apps in the last two years faced annual interest rates over 25%.",
   },
   {
     line1: "AisaTechDaily",
@@ -65,11 +65,11 @@ function News() {
             >
                <div className="flex items-center gap-2">
                 <Newspaper className="text-emerald-600 w-6 h-6" />
-                <p className="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                <p className="bg-emerald-600 text-white px-3  rounded-full text-xs font-semibold">
                   {item.line1}
                 </p>
               </div>
-              <p className="text-[14px] text-gray-600 mt-2">{item.line2}</p>
+              <p className="text-[14px] text-gray-600 ">{item.line2}</p>
             </div>
           ))}
         </div>
