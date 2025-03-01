@@ -112,7 +112,7 @@ const Body = () => {
       Take control of your financial future with smart investment insights, instant loan options,
       and expert financial planning. Our platform provides the best solutions tailored to your needs.
     </p>
-    <NavLink to={"/KnowMore"} className="inline-block no-underline bg-green-600 hover:bg-green-700 text-white font-semibold px-10 py-2 rounded-2xl text-lg transition-all">
+    <NavLink to={"/KnowMore"} className="inline-block no-underline bg-blue-600 hover:bg-blue-700 text-white font-semibold px-10 py-2 rounded-2xl text-lg transition-all">
       Know Us
     </NavLink>
   </div>
@@ -133,7 +133,7 @@ const Body = () => {
             Financial success starts with a solid plan! Our platform helps you track your income, 
             manage expenses, and discover smart saving opportunities.
           </p>
-          <NavLink to={"/FinancialFreedom"} className="inline-block no-underline bg-green-600 hover:bg-green-700 text-white font-semibold px-10 py-2 rounded-2xl text-lg transition-all">
+          <NavLink to={"/FinancialFreedom"} className="inline-block no-underline bg-blue-600 hover:bg-blue-700 text-white font-semibold px-10 py-2 rounded-2xl text-lg transition-all">
             Know Us
           </NavLink>
         </div>

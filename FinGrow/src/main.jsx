@@ -7,7 +7,7 @@ import Suggestion from './Components/Suggestion.jsx'
 import Signup from './Components/Signup.jsx'
 import Loan from './Components/Loan.jsx'
 import Home from './Components/Home.jsx'
-import Insurance from './Components/Insurance.jsx'
+import Trends from './Components/Trends.jsx'
 import GetLoan from './Components/GetLoan.jsx'
 import ProvideLoan from './Components/ProvideLoan.jsx'
 import LoanForm from './Components/Loan-summary.jsx'
@@ -36,8 +36,8 @@ const router = createBrowserRouter([
         element: <Signup />
       },
       {
-        path: '/Insurance',
-        element: <Insurance />
+        path: '/trends',
+        element: <Trends />
       },
       {
         path: '/Loan',
