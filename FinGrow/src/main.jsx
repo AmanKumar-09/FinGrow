@@ -10,6 +10,9 @@ import Home from './Components/Home.jsx'
 import Insurance from './Components/Insurance.jsx'
 import GetLoan from './Components/GetLoan.jsx'
 import ProvideLoan from './Components/ProvideLoan.jsx'
+import KnowMore from './Components/Knowmore.jsx'
+import MentorCard from './Components/MentorCard.jsx'
+import FinancialFreedom from './Components/FinancialFreedom.jsx'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +47,18 @@ const router = createBrowserRouter([
         path: '/loan/provide-loan',
         element: <ProvideLoan />
       },
+      {
+        path:"/KnowMore",
+        element:<KnowMore/>
+      },
+      {
+        path:"/MentorCard",
+        element:<MentorCard/>
+      },
+      {
+        path:"/FinancialFreedom",
+        element:<FinancialFreedom/>
+      }
 
     ]
 
