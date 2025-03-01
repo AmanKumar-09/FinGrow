@@ -14,6 +14,9 @@ import LoanForm from './Components/Loan-summary.jsx'
 import Aadhar from './Components/Aadhar.jsx'
 import UserForm from './Components/BasicKYC.jsx'
 import BankDetails from './Components/BankKYC.jsx'
+import KnowMore from './Components/Knowmore.jsx'
+import MentorCard from './Components/MentorCard.jsx'
+import FinancialFreedom from './Components/FinancialFreedom.jsx'
 
 const router = createBrowserRouter([
   {
@@ -47,6 +50,18 @@ const router = createBrowserRouter([
       {
         path: '/loan/provide-loan',
         element: <ProvideLoan />
+      },
+      {
+        path:"/KnowMore",
+        element:<KnowMore/>
+      },
+      {
+        path:"/MentorCard",
+        element:<MentorCard/>
+      },
+      {
+        path:"/FinancialFreedom",
+        element:<FinancialFreedom/>
       },
       {
         path: '/Pan-Verify',

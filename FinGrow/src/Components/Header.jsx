@@ -90,7 +90,9 @@ const Header = () => {
                         <NavLink
                             to={link.route}
                             key={index}
-                            className={({ isActive }) => isActive ? "text-yellow-500 font-bold" : "text-black"}
+                            className={({ isActive }) =>
+                                `no-underline ${isActive ? "text-yellow-500 font-bold" : "text-black"}`
+                              }
                         >
                             {link.name}
                         </NavLink>

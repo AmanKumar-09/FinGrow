@@ -20,7 +20,7 @@ function Loan() {
   return (
     <div>
       <Crousal />
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-3  pt-10 mt-36 mb-10 my-10'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-3  pt-10  mb-10 my-10'>
 
 
         <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center text-center">
