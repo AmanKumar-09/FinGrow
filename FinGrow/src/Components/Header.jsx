@@ -74,9 +74,11 @@ const Header = () => {
     const links = [
         { name: "Home", route: "/" },
         { name: "Loan", route: "/loan" },
-        { name: "Insurance", route: "/insurance" },
+        { name: "Trends", route: "/trends" },
+        {name:"Financial Planning",route:"/FinancialFreedom"},
         { name: "Suggestion", route: "/suggestion" },
         { name: "Sign-Up", route: "/signup" },
+       
     ];
 
     return (

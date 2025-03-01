@@ -26,7 +26,7 @@ def get_usd_to_inr():
         response = requests.get("https://api.exchangerate-api.com/v4/latest/USD")
         data = response.json()
         return data.get("rates", {}).get("INR", DEFAULT_INR_RATE)
-    except requests.RequestException:
+    except requests.RequestException:  
         return DEFAULT_INR_RATE
 
 @app.route('/')
