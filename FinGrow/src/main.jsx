@@ -10,6 +10,10 @@ import Home from './Components/Home.jsx'
 import Insurance from './Components/Insurance.jsx'
 import GetLoan from './Components/GetLoan.jsx'
 import ProvideLoan from './Components/ProvideLoan.jsx'
+import LoanForm from './Components/Loan-summary.jsx'
+import Aadhar from './Components/Aadhar.jsx'
+import UserForm from './Components/BasicKYC.jsx'
+import BankDetails from './Components/BankKYC.jsx'
 
 const router = createBrowserRouter([
   {
@@ -44,7 +48,22 @@ const router = createBrowserRouter([
         path: '/loan/provide-loan',
         element: <ProvideLoan />
       },
-
+      {
+        path: '/Pan-Verify',
+        element: <LoanForm />
+      },
+      {
+        path: '/Aadhar-verify',
+        element: <Aadhar/>
+      },
+      {
+        path: '/Basic-verify',
+        element: <UserForm/>
+      },
+      {
+        path: '/Bank-verify',
+        element: <BankDetails/>
+      },
     ]
 
   }

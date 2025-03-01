@@ -1,26 +1,27 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'
-import crousel1 from '../assets/img/loan-image-1.webp'
-import crousel2 from '../assets/img/loan-image-2.png'
-import crousel3 from '../assets/img/loan-image-3.jpg'
-import crousel4 from '../assets/img/loan-image-1.webp'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
+import crousel1 from '../assets/img/fingrow-loan.png'
+import crousel2 from '../assets/img/loan-fingrow-detail.png'
+import crousel3 from '../assets/img/untitled design (3).png'
+import crousel4 from '../assets/img/personal-loan.png'
 
 function Carousel() {
   return (
-    <div id="carouselExampleAutoplaying" className="carousel slide  h-[50vh] " data-bs-ride="carousel">
+    <div id="carouselExampleAutoplaying" className="carousel slide  pt-[100px]" data-bs-ride="carousel">
       <div className="carousel-inner">
         <div className="carousel-item active">
-          <img src={crousel1} className="d-block w-100  h-[70vh]" alt="..." />
+          <img src={crousel1} className="d-block w-100" alt="..." />
         </div>
         <div className="carousel-item">
-          <img src={crousel2} className="d-block w-100 h-[70vh]" alt="..." />
+          <img src={crousel3} className="d-block w-100" alt="..." />
         </div>
         <div className="carousel-item">
-          <img src={crousel3} className="d-block w-100  h-[70vh]" alt="..." />
+          <img src={crousel2} className="d-block w-100" alt="..." />
         </div>
         <div className="carousel-item">
-          <img src={crousel4} className="d-block w-100  h-[70vh]" alt="..." />
+          <img src={crousel4} className="d-block w-100" alt="..." />
         </div>
       </div>
       <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
