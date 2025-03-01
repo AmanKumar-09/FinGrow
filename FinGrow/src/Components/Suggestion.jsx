@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import Chatbot from './ChatBot'
 const Suggestion = () => {
   const [salary, setSalary] = useState("");
   const [spendings, setSpendings] = useState("");
