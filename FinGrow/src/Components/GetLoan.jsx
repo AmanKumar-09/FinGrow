@@ -1,64 +1,99 @@
 import { useState } from "react";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
-export default function LoanPage() {
-  const [loanAmount, setLoanAmount] = useState(500);
-  const minLoan = 500;
-  const maxLoan = 20000;
-  const repaymentDate = "06.03.2025";
-  // const repaymentAmount = loanAmount; // Assuming no extra interest in display
-  const repaymentAmount = (loanAmount * 1.18).toFixed(2); // Including 18% increase
+function GetLoan() {
+  const [amount, setAmount] = useState(40000);
+  const [phone, setPhone] = useState("");
 
+  // Calculate total repayment (Assume 10% interest)
+  const interestRate = 0.8;
+  const totalRepayment = Math.round(amount * (1 + interestRate));
+
+  // Calculate repayment date (6 months from today)
+  const repaymentDate = new Date();
+  repaymentDate.setMonth(repaymentDate.getMonth() + 6);
+  const formattedDate = repaymentDate.toLocaleDateString("en-GB");
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center">
-     
-      
-      {/* Loan Section */}
-      <div className="bg-white shadow-lg rounded-lg p-6 mt-10 max-w-3xl w-full flex justify-between items-center">
-        <div className="w-2/3 pr-4">
-          <h2 className="text-2xl font-bold text-blue-600">Instant <span className="text-black">cash loans</span></h2>
-          <p className="text-gray-700 text-sm">Up to ₹40,000 for up to 180 days in 5 minutes.<br/>First loan for FREE</p>
-          <p className="text-gray-700 font-semibold mt-2">You don’t need to confirm income, bring references, visit our office</p>
-          
+    <div className="flex justify-center items-center min-h-screen border p-5">
+      <div className="flex flex-col md:flex-row bg-white border border-gray-100 shadow-2xl rounded-3xl overflow-hidden w-[900px] h-auto">
+        {/* Left Side - Loan Info */}
+        <div className="p-8 md:w-2/3 flex flex-col justify-center">
+          <h2 className="text-3xl font-bold">
+            <span className="text-blue-600">Instant</span> Cash Loans
+          </h2>
+          <p className="text-gray-600 text-sm mt-2">
+            Get up to <span className="font-bold">₹40,000</span> for up to 180 days in just 5 minutes.
+            <span className="block text-blue-600 font-semibold">First loan is FREE!</span>
+          </p>
+          <p className="text-black font-semibold mt-3 text-sm">
+            No income proof, no references, no office visits required.
+          </p>
+
+          {/* Loan Slider */}
           <div className="mt-4">
-            <p className="text-lg font-semibold">I am borrowing</p>
+            <p className="font-bold text-lg">I am borrowing</p>
+            <div className="flex justify-between text-gray-500 text-sm">
+              <span>₹1,000</span>
+              <span>₹40,000</span>
+            </div>
             <input
               type="range"
-              min={minLoan}
-              max={maxLoan}
-              value={loanAmount}
-              onChange={(e) => setLoanAmount(Number(e.target.value))}
-              className="w-full mt-2"
+              min="1000"
+              max="40000"
+              step="1000"
+              value={amount}
+              onChange={(e) => setAmount(parseInt(e.target.value))}
+              className="w-full mt-1 accent-blue-600 cursor-pointer"
             />
-            <div className="flex justify-between text-sm text-gray-700">
-              <span>₹{minLoan}</span>
-              <span className="text-lg font-bold">₹{loanAmount}</span>
-              <span>₹{maxLoan}</span>
-            </div>
+            <p className="text-right font-bold text-xl">₹{amount.toLocaleString()}</p>
           </div>
 
-          <div className="mt-4 flex justify-between text-gray-700 text-sm">
-            <p>Total repayment: <span className="font-semibold">₹{repaymentAmount}</span></p>
-            <p>Repayment date: <span className="font-semibold">{repaymentDate}</span></p>
+          {/* Loan Details */}
+          <div className="mt-4 text-gray-600 text-sm grid grid-cols-2 gap-4">
+            <p className="font-bold">Total repayment</p>
+            <p className="font-bold text-right">Repayment date</p>
+            <p className="font-semibold text-lg text-black">₹{totalRepayment.toLocaleString()}</p>
+            <p className="font-semibold text-lg text-right text-black">{formattedDate}</p>
           </div>
         </div>
-        
-        <div className="w-1/3 text-center">
-          <input
-            type="text"
-            placeholder="Mobile phone number"
-            className="w-full p-2 border rounded text-center"
-          />
-          <button className="mt-4 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
+
+        {/* Right Side - Phone Input */}
+        <div className="bg-blue-600 p-8 md:w-1/3 flex flex-col justify-center items-center rounded-r-3xl">
+          {/* Phone Input */}
+          <div className="w-full flex justify-center">
+            <PhoneInput
+              country={"us"}
+              value={phone}
+              onChange={(value) => setPhone("+" + value)}
+              inputStyle={{
+                width: "100%",
+                paddingLeft: "43px",
+              }}
+            />
+          </div>
+
+          <p className="text-white text-xs text-center mt-2">
+            Enter your mobile number
+          </p>
+
+          <button
+            className="mt-4 bg-white text-blue-600 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-100 transition duration-200"
+          >
             GET CASH TODAY
           </button>
-          <p className="text-xs text-gray-600 mt-2">
-            By clicking on the "Get cash today" button above, I acknowledge that I have read and agree to the <span className="text-blue-500 underline">Terms and Conditions</span> and <span className="text-blue-500 underline">Privacy Policy</span>.
+
+          <p className="text-white text-xs text-center mt-3">
+            By clicking "Get cash today", you agree to the
+            <a href="#" className="underline"> Terms & Conditions </a> and
+            <a href="#" className="underline"> Privacy Policy</a>.
           </p>
         </div>
       </div>
-      
-     
     </div>
   );
+  
 }
+
+export default GetLoan;

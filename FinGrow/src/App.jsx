@@ -8,12 +8,11 @@ import Footer from './Components/Footer.jsx'
 function App() {
 
   return (
-    <>
-    <Header />
-    <Outlet/>
-    <Footer/>
-    
-    </>
+    <div className="font-poppins">  {/* Apply font globally */}
+      <Header />
+      <Outlet />
+      <Footer />
+    </div>
   )
 }
 
