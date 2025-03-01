@@ -3,6 +3,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "../firebase/auth.jsx";
+import Chatbot from "./ChatBot.jsx";
 
 function Insurance() {
   const [phone, setPhone] = useState("");
@@ -67,6 +68,7 @@ function Insurance() {
           Verify OTP
         </button>
       </div>
+      <Chatbot/>
     </div>
   );
 }

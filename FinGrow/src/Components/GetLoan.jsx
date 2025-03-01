@@ -1,19 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { Link } from "react-router-dom";
+import Loaninfo from "./LoanInfo";
+import Chatbot from "./ChatBot";
 
 function GetLoan() {
   const [amount, setAmount] = useState(40000);
   const [phone, setPhone] = useState("");
+  const [count, setCount] = useState(0)
+
+
+  useEffect(() => {
+    <Loaninfo amount={amount} totalRepayment={totalRepayment} />
+  }, [count]); 
+
 
   // Calculate total repayment (Assume 10% interest)
-  const interestRate = 0.8;
+  const interestRate = 0.3;
   const totalRepayment = Math.round(amount * (1 + interestRate));
 
   // Calculate repayment date (6 months from today)
   const repaymentDate = new Date();
-  repaymentDate.setMonth(repaymentDate.getMonth() + 6);
+  repaymentDate.setMonth(repaymentDate.getMonth() + 1);
   const formattedDate = repaymentDate.toLocaleDateString("en-GB");
+
+
 
   return (
     <div className="flex justify-center items-center min-h-screen border p-5">
@@ -77,12 +89,16 @@ function GetLoan() {
           <p className="text-white text-xs text-center mt-2">
             Enter your mobile number
           </p>
+          <Link to="/Basic-verify">        
+
 
           <button
             className="mt-4 bg-white text-blue-600 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-100 transition duration-200"
+            onClick={() => setCount(count + 1)}
           >
             GET CASH TODAY
           </button>
+          </Link>
 
           <p className="text-white text-xs text-center mt-3">
             By clicking "Get cash today", you agree to the
@@ -91,9 +107,11 @@ function GetLoan() {
           </p>
         </div>
       </div>
+      <Chatbot/>
     </div>
+    
   );
-  
+
 }
 
 export default GetLoan;

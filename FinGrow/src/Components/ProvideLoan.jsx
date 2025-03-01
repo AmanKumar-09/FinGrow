@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Chatbot from "./ChatBot";
 
 const ProvideLoan = () => {
   const [amount, setAmount] = useState("");
@@ -50,6 +51,7 @@ const ProvideLoan = () => {
           </button>
         </form>
       </div>
+      <Chatbot/>
     </div>
   );
 };

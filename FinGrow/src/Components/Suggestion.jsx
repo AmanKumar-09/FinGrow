@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Chatbot from './ChatBot';
 
 const Suggestion = () => {
   const [salary, setSalary] = useState("");
@@ -14,7 +15,7 @@ const Suggestion = () => {
 
     try {
       // Calculate Savings API Call
-      const savingsResponse = await fetch("/calculate_savings", {
+      const savingsResponse = await fetch("http://localhost:5000/calculate_savings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ salary: Number(salary), spendings: spendingsArray }),
@@ -26,7 +27,7 @@ const Suggestion = () => {
       setSavings(savingsData.savings);
 
       // AI Suggestions API Call
-      const aiResponse = await fetch("/ai_suggestions", {
+      const aiResponse = await fetch("http://localhost:5000/ai_suggestions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ savings: savingsData.savings }),
@@ -47,7 +48,7 @@ const Suggestion = () => {
 
   const handleInvestmentClick = async () => {
     try {
-      const investmentResponse = await fetch("/get_investment_recommendations", {
+      const investmentResponse = await fetch("http://localhost:5000/get_investment_recommendations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ savings: Number(savings), risk_tolerance: "medium" }),
@@ -118,14 +119,15 @@ const Suggestion = () => {
           <ul className="list-disc list-inside text-gray-700">
             {investmentRecommendations.map(([symbol, price], index) => (
               <li key={index}>
-                {symbol}: ₹{price}
+                {symbol}: {price}
               </li>
             ))}
           </ul>
         </div>
       )}
+     
     </div>
   );
-};
+}
 
-export default Suggestion;
+export default Suggestion;
