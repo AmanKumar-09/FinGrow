@@ -1,4 +1,5 @@
 import React from 'react'
+import Chatbot from './ChatBot'
 
 function Suggestion() {
   return (
@@ -48,6 +49,7 @@ function Suggestion() {
                  
             </form>
         </div>
+        <Chatbot/>
     </div>
   )
 }

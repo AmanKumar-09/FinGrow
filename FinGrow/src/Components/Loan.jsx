@@ -1,6 +1,7 @@
 import React from 'react'
 import Crousal from '../Utils/Crousal'
 import { NavLink } from 'react-router-dom'
+import Chatbot from './ChatBot'
 
 function Loan() {
 
@@ -62,6 +63,7 @@ function Loan() {
         </div>
 
       </div>
+      <Chatbot/>
     </div>
   )
 }
