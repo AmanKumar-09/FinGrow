@@ -64,8 +64,8 @@ function News() {
               className="border border-gray-300 bg-white w-64 h-36 p-4 rounded-2xl shadow-md transition-transform duration-300 hover:scale-105"
             >
                <div className="flex items-center gap-2">
-                <Newspaper className="text-emerald-600 w-6 h-6" />
-                <p className="bg-emerald-600 text-white px-3  rounded-full text-xs font-semibold">
+                <Newspaper className="text-blue-600 w-6 h-6" />
+                <p className="bg-blue-600 text-white px-3  rounded-full text-xs font-semibold">
                   {item.line1}
                 </p>
               </div>

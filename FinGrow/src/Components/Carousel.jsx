@@ -31,7 +31,7 @@ function Carousel() {
   ]
 
   return (
-    <div className="flex  flex-col items-center justify-center py-10 bg-white">
+    <div className="flex  flex-col items-center justify-center  bg-white">
       {/* Heading */}
       <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">
         <span className="border-b-2 border-yellow-400">Join the millions</span> who have said <span className="text-yellow-500">"YES"</span> to FinGrow
