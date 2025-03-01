@@ -93,6 +93,7 @@ function GetLoan() {
       </div>
     </div>
   );
+  
 }
 
 export default GetLoan;
