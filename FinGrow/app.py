@@ -12,7 +12,6 @@ load_dotenv()
 DEFAULT_INR_RATE = 83
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-
 genai.configure(api_key=GEMINI_API_KEY)
 
 app = Flask(__name__)
@@ -61,7 +60,7 @@ def ai_suggestions():
 
     try:
         model = genai.GenerativeModel('gemini-2.0-flash')
-        prompt = f"I have ₹{savings} in savings each month. Please suggest financial planning ideas, including savings, investment, and expense reduction.Make it simple for example i do not know much about finance.Give response in less than 210 words.(don't give disclaimer that it is not financial advice as its a financial AI model)"
+        prompt = f"I have ₹{savings} in savings each month. Please suggest financial planning ideas, including savings, investment, and expense reduction. Make it simple for example I do not know much about finance. Give response in less than 210 words. (don't give disclaimer that it is not financial advice as it's a financial AI model)"
         response = model.generate_content(prompt)
         suggestion = response.text if response and hasattr(response, 'text') else "No AI response."
 

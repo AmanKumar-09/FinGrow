@@ -1,36 +1,37 @@
-import { useState } from "react";
-import Chatbot from './ChatBot';
+import { useState, useEffect } from "react";
 
 const Suggestion = () => {
   const [salary, setSalary] = useState("");
-  const [spendings, setSpendings] = useState("");
+  const [houseRent, setHouseRent] = useState("");
+  const [electricityBill, setElectricityBill] = useState("");
+  const [groceryExpenses, setGroceryExpenses] = useState("");
+  const [otherExpenses, setOtherExpenses] = useState("");
+  const [savingsGoal, setSavingsGoal] = useState("");
+  const [totalSpending, setTotalSpending] = useState(0);
   const [savings, setSavings] = useState(null);
   const [aiSuggestion, setAiSuggestion] = useState("");
   const [investmentRecommendations, setInvestmentRecommendations] = useState([]);
   const [showInvestmentButton, setShowInvestmentButton] = useState(false);
 
+  // Calculate total spending whenever any expense changes
+  useEffect(() => {
+    setTotalSpending(
+      Number(houseRent) + Number(electricityBill) + Number(groceryExpenses) + Number(otherExpenses)
+    );
+  }, [houseRent, electricityBill, groceryExpenses, otherExpenses]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const spendingsArray = spendings.split(",").map(Number);
+    const remainingSavings = Number(salary) - totalSpending - Number(savingsGoal);
+
+    setSavings(remainingSavings); // Directly setting savings in state
 
     try {
-      // Calculate Savings API Call
-      const savingsResponse = await fetch("http://localhost:5000/calculate_savings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ salary: Number(salary), spendings: spendingsArray }),
-      });
-
-      if (!savingsResponse.ok) throw new Error("Failed to calculate savings.");
-
-      const savingsData = await savingsResponse.json();
-      setSavings(savingsData.savings);
-
       // AI Suggestions API Call
       const aiResponse = await fetch("http://localhost:5000/ai_suggestions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ savings: savingsData.savings }),
+        body: JSON.stringify({ savings: remainingSavings }),
       });
 
       if (!aiResponse.ok) throw new Error("Failed to get AI suggestions.");
@@ -65,32 +66,32 @@ const Suggestion = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-12 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-2xl mx-auto mt-12 p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Financial Planner</h2>
 
       <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-        <label className="font-medium">Monthly Salary (₹):</label>
-        <input
-          type="number"
-          value={salary}
-          onChange={(e) => setSalary(e.target.value)}
-          className="p-2 border border-gray-300 rounded-md focus:ring focus:ring-green-200"
-          required
-        />
+        <label className="font-medium">Enter Monthly Salary (₹):</label>
+        <input type="number" value={salary} onChange={(e) => setSalary(e.target.value)} className="p-2 border border-gray-300 rounded-md" required />
 
-        <label className="font-medium">Monthly Spendings (comma-separated ₹):</label>
-        <input
-          type="text"
-          value={spendings}
-          onChange={(e) => setSpendings(e.target.value)}
-          className="p-2 border border-gray-300 rounded-md focus:ring focus:ring-green-200"
-          required
-        />
+        <label className="font-medium">Enter House Rent (₹):</label>
+        <input type="number" value={houseRent} onChange={(e) => setHouseRent(e.target.value)} className="p-2 border border-gray-300 rounded-md" required />
 
-        <button
-          type="submit"
-          className="p-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition"
-        >
+        <label className="font-medium">Enter Electricity Bill (₹):</label>
+        <input type="number" value={electricityBill} onChange={(e) => setElectricityBill(e.target.value)} className="p-2 border border-gray-300 rounded-md" required />
+
+        <label className="font-medium">Enter Grocery Expenses (₹):</label>
+        <input type="number" value={groceryExpenses} onChange={(e) => setGroceryExpenses(e.target.value)} className="p-2 border border-gray-300 rounded-md" required />
+
+        <label className="font-medium">Enter Other Expenses (₹):</label>
+        <input type="number" value={otherExpenses} onChange={(e) => setOtherExpenses(e.target.value)} className="p-2 border border-gray-300 rounded-md" required />
+
+        <label className="font-medium">Total Spending (₹):</label>
+        <input type="number" value={totalSpending} readOnly className="p-2 border border-gray-300 rounded-md bg-gray-100" />
+
+        {/* <label className="font-medium">Enter Savings Goal (₹):</label>
+        <input type="number" value={savingsGoal} onChange={(e) => setSavingsGoal(e.target.value)} className="p-2 border border-gray-300 rounded-md" required /> */}
+
+        <button type="submit" className="p-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600">
           Get AI Suggestions
         </button>
       </form>
@@ -99,7 +100,22 @@ const Suggestion = () => {
       <div className="mt-6 p-4 bg-gray-100 rounded-md">
         <h3 className="text-lg font-semibold text-gray-700">Results:</h3>
         {savings !== null && <p className="text-gray-700">Your savings: ₹{savings}</p>}
-        {aiSuggestion && <p className="text-gray-700">AI Suggestion: {aiSuggestion}</p>}
+        {/* {aiSuggestion && <p className="text-gray-700">AI Suggestion: {aiSuggestion}</p>} */}
+
+        {aiSuggestion && (
+          <div className="text-gray-700">
+            <h3 className="font-semibold">AI Suggestion:</h3>
+            <ol className="list-decimal list-inside mt-2 space-y-2">
+              {aiSuggestion
+                .split('. ')
+                .filter((suggestion) => suggestion.trim() !== '') // Remove empty suggestions
+                .map((suggestion, index) => (
+                  <li key={index}>{suggestion.trim()}</li>
+                ))}
+            </ol>
+          </div>
+        )}
+
       </div>
 
       {/* Investment Button */}
@@ -125,9 +141,8 @@ const Suggestion = () => {
           </ul>
         </div>
       )}
-     
     </div>
   );
-}
+};
 
 export default Suggestion;
