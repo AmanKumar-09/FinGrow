@@ -17,6 +17,7 @@ import BankDetails from './Components/BankKYC.jsx'
 import KnowMore from './Components/Knowmore.jsx'
 import MentorCard from './Components/MentorCard.jsx'
 import FinancialFreedom from './Components/FinancialFreedom.jsx'
+import Profile from './Components/Profile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: '/trends',
         element: <Trends />
+      },
+      {
+        path: '/Profile',
+        element: <Profile />
       },
       {
         path: '/Loan',

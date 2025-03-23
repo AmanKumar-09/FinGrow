@@ -1,20 +1,29 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
+import Profile from "./Profile"; // Import your Profile component
 
 const Signup = () => {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const name = useRef();
   const email = useRef();
   const password = useRef();
   const confirmPassword = useRef();
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    // Check if the user is already logged in
+    const storedAuth = localStorage.getItem("isAuthenticated");
+    if (storedAuth) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (isSignUp) {
-        // Sign-up logic
         if (password.current.value !== confirmPassword.current.value) {
           setError("Passwords do not match");
           return;
@@ -24,16 +33,18 @@ const Signup = () => {
           email: email.current?.value,
           password: password.current?.value,
         });
-        console.log("Signup success:", response.data);
         alert("Signup successfully");
       } else {
-        // Sign-in logic
         const response = await axios.post("/api/v1/users/login", {
           email: email.current?.value,
           password: password.current?.value,
         });
-        console.log("Signin success:", response.data);
+
         alert("Signin successfully!");
+
+        // Save authentication state
+        localStorage.setItem("isAuthenticated", "true");
+        setIsAuthenticated(true);
       }
     } catch (err) {
       console.log("Error:", err.response ? err.response.data : err.message);
@@ -41,6 +52,10 @@ const Signup = () => {
       alert("Something went wrong");
     }
   };
+
+  if (isAuthenticated) {
+    return <Profile />; // Show Profile page if authenticated
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r border">
