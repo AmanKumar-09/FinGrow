@@ -66,7 +66,7 @@ const Suggestion = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-12 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-2xl mx-auto mt-12 p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Financial Planner</h2>
 
       <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
@@ -100,7 +100,22 @@ const Suggestion = () => {
       <div className="mt-6 p-4 bg-gray-100 rounded-md">
         <h3 className="text-lg font-semibold text-gray-700">Results:</h3>
         {savings !== null && <p className="text-gray-700">Your savings: ₹{savings}</p>}
-        {aiSuggestion && <p className="text-gray-700">AI Suggestion: {aiSuggestion}</p>}
+        {/* {aiSuggestion && <p className="text-gray-700">AI Suggestion: {aiSuggestion}</p>} */}
+
+        {aiSuggestion && (
+          <div className="text-gray-700">
+            <h3 className="font-semibold">AI Suggestion:</h3>
+            <ol className="list-decimal list-inside mt-2 space-y-2">
+              {aiSuggestion
+                .split('. ')
+                .filter((suggestion) => suggestion.trim() !== '') // Remove empty suggestions
+                .map((suggestion, index) => (
+                  <li key={index}>{suggestion.trim()}</li>
+                ))}
+            </ol>
+          </div>
+        )}
+
       </div>
 
       {/* Investment Button */}

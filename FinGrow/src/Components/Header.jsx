@@ -87,18 +87,19 @@ const Header = () => {
                 <div>
                     <img className='w-40' src={logo} alt="logo" />
                 </div>
-                <nav className='flex list-none gap-12 items-center justify-center text-lg pr-12'>
+                <nav className='flex list-none gap-12 items-center justify-center text-xl pr-12'>
                     {links.map((link, index) => (
                         <NavLink
                             to={link.route}
                             key={index}
                             className={({ isActive }) =>
-                                `no-underline ${isActive ? "text-yellow-500 font-bold" : "text-black"}`
+                                `no-underline  ${isActive ? "text-yellow-500 font-bold" : "text-black"}`
                               }
                         >
                             {link.name}
                         </NavLink>
-                    ))}
+                       
+                  ))}
                 </nav>
             </div>
         </>
