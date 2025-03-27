@@ -7,7 +7,6 @@ const Chatbot = () => {
     script.defer = true;
     script.setAttribute("chatbotId", "1HeJK6Pn9PF7HScvhUDum");
     script.setAttribute("domain", "www.chatbase.co");
-
     document.body.appendChild(script);
 
     return () => {

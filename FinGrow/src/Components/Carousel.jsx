@@ -31,24 +31,24 @@ function Carousel() {
   ]
 
   return (
-    <div className="flex  flex-col items-center justify-center  bg-white">
+    <div className="flex mt-16  flex-col items-center justify-center  bg-white">
       {/* Heading */}
-      <h2 className="text-xl font-semibold text-gray-800 mb-6 text-center">
+      <h2 className="text-2xl font-bold text-gray-800 mb-10 mt-10 text-center">
         <span className="border-b-2 border-yellow-400">Join the millions</span> who have said <span className="text-yellow-500">"YES"</span> to FinGrow
       </h2>
 
       {/* Carousel Container */}
-      <div className="relative  py-4 w-full max-w-3xl ">
+      <div className="relative  md:w-2/3 md:text-left space-y-4 h-96">
         {/* Scrollable Cards (Hidden Scrollbar) */}
         <div
           ref={scrollRef}
-          className="flex  pb-5 space-x-4 overflow-x-scroll no-scrollbar scroll-smooth px-4"
+          className="flex   pb-5 space-x-4 overflow-x-scroll no-scrollbar scroll-smooth px-4"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }} // Hide scrollbar for Firefox & IE
         >
            
           {links.map((link,index) =>
           (
-            <div key={index} className="flex flex-col  hover:scale-105 hover:translate-y-2 transition-all duration-300 items-center border border-gray-200 bg-white shadow-lg rounded-xl p-6 min-w-[250px]"
+            <div key={index} className="flex flex-col  hover:scale-105 hover:translate-y-2 transition-all duration-300 items-center border border-gray-200 bg-white shadow-lg rounded-xl p-6 md:w-1/3 my-7"
             >
             <img src={link.src} alt="Financial App" className="w-16 h-16 mb-3" />
             <h3 className="text-lg font-semibold text-gray-800 text-center">

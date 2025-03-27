@@ -63,7 +63,7 @@ const FAQ = () => {
                 onClick={() => toggleFAQ(index)}
               >
                 {faq.question}
-                <span className="text-xl">{activeIndex === index ? "−" : "+"}</span>
+                <span className="text-xl text-green-400">{activeIndex === index ? "−" : "+"}</span>
               </button>
               {activeIndex === index && (
                 <p className="text-gray-600 mt-2">{faq.answer}</p>
