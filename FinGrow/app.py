@@ -18,6 +18,8 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 ai_suggestions_cache = {}
+stock_recommendations_cache = {}
+inr_usd_rate = DEFAULT_INR_RATE
 
 # Function to convert USD to INR
 def get_usd_to_inr():
@@ -77,126 +79,27 @@ def ai_suggestions():
 def get_investment_recommendations():
     data = request.json
     savings = data.get('savings', 0)
-    risk_tolerance = data.get('risk_tolerance', 'medium')
+    cache_key = hashlib.md5(f"{savings}".encode()).hexdigest()
 
-    recommendations = {
-        "low": {
-            "low_savings": {
-                "stocks": {
-                    "Johnson & Johnson (JNJ)": "₹1500",
-                    "Procter & Gamble (PG)": "₹1400",
-                    "Coca-Cola (KO)": "₹1300"
-                },
-                "crypto": {
-                    "Bitcoin (BTC)": "₹15000",
-                    "Ethereum (ETH)": "₹12000"
-                }
-            },
-            "medium_savings": {
-                "stocks": {
-                    "PepsiCo (PEP)": "₹1600",
-                    "McDonald's (MCD)": "₹1700",
-                    "Walmart (WMT)": "₹1800"
-                },
-                "crypto": {
-                    "Bitcoin (BTC)": "₹16000",
-                    "Ethereum (ETH)": "₹13000"
-                }
-            },
-            "high_savings": {
-                "stocks": {
-                    "Visa (V)": "₹1900",
-                    "Mastercard (MA)": "₹2000",
-                    "Disney (DIS)": "₹2100"
-                },
-                "crypto": {
-                    "Bitcoin (BTC)": "₹17000",
-                    "Ethereum (ETH)": "₹14000"
-                }
-            }
-        },
-        "medium": {
-            "low_savings": {
-                "stocks": {
-                    "Apple (AAPL)": "₹2500",
-                    "Microsoft (MSFT)": "₹2400",
-                    "Alphabet (GOOGL)": "₹2300"
-                },
-                "crypto": {
-                    "Bitcoin (BTC)": "₹18000",
-                    "Ethereum (ETH)": "₹16000"
-                }
-            },
-            "medium_savings": {
-                "stocks": {
-                    "Amazon (AMZN)": "₹2600",
-                    "Facebook (FB)": "₹2700",
-                    "Netflix (NFLX)": "₹2800"
-                },
-                "crypto": {
-                    "Bitcoin (BTC)": "₹19000",
-                    "Ethereum (ETH)": "₹17000"
-                }
-            },
-            "high_savings": {
-                "stocks": {
-                    "Tesla (TSLA)": "₹2900",
-                    "NVIDIA (NVDA)": "₹3000",
-                    "Coinbase (COIN)": "₹3100"
-                },
-                "crypto": {
-                    "Bitcoin (BTC)": "₹20000",
-                    "Ethereum (ETH)": "₹18000"
-                }
-            }
-        },
-        "high": {
-            "low_savings": {
-                "stocks": {
-                    "Tesla (TSLA)": "₹3500",
-                    "NVIDIA (NVDA)": "₹3400",
-                    "Coinbase (COIN)": "₹3300"
-                },
-                "crypto": {
-                    "Bitcoin (BTC)": "₹20000",
-                    "Ethereum (ETH)": "₹19000"
-                }
-            },
-            "medium_savings": {
-                "stocks": {
-                    "Shopify (SHOP)": "₹3600",
-                    "Square (SQ)": "₹3700",
-                    "Zoom (ZM)": "₹3800"
-                },
-                "crypto": {
-                    "Bitcoin (BTC)": "₹21000",
-                    "Ethereum (ETH)": "₹20000"
-                }
-            },
-            "high_savings": {
-                "stocks": {
-                    "Spotify (SPOT)": "₹3900",
-                    "Roku (ROKU)": "₹4000",
-                    "DocuSign (DOCU)": "₹4100"
-                },
-                "crypto": {
-                    "Bitcoin (BTC)": "₹22000",
-                    "Ethereum (ETH)": "₹21000"
-                }
-            }
-        }
-    }
+    if cache_key in stock_recommendations_cache:
+        return jsonify({"stocks": stock_recommendations_cache[cache_key]})
 
-    if savings < 5000:
-        savings_category = "low_savings"
-    elif savings < 15000:
-        savings_category = "medium_savings"
-    else:
-        savings_category = "high_savings"
+    try:
+        import google.generativeai as genai
+        genai.configure(api_key=os.getenv("GEMINI_API_KEY1"))
+        model = genai.GenerativeModel('gemini-1.5-flash')  # Using gemini-1.5-flash for consistency
+        prompt = f"List 5 affordable Indian stocks I can buy with ₹{savings} savings. Provide only the stock names and approximate prices in INR in the format 'Stock Name - ₹Price', one per line. Do not include any additional text, paragraphs, disclaimers, or explanations. Just the list."
+        response = model.generate_content(prompt)
+        stock_text = response.text if response and hasattr(response, 'text') else "No stock recommendations."
 
-    selected_data = recommendations.get(risk_tolerance, recommendations["medium"]).get(savings_category, recommendations["medium"]["medium_savings"])
-
-    return jsonify(selected_data)
+        cleaned_stock_text = clean_text(stock_text)
+        stocks = [stock.strip() for stock in cleaned_stock_text.split('\n') if stock.strip()]
+        stock_recommendations_cache[cache_key] = stocks
+        print(f"Gemini stock recommendations: {stocks}")
+        return jsonify({"stocks": stocks})
+    except Exception as e:
+        print(f"Stock Recommendation Error: {e}")
+        return jsonify({"error": f"Stock recommendation failed: {str(e)}"}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
