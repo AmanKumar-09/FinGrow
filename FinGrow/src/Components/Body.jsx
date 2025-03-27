@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom';
 
 const Body = () => {
   return (
+    <>
     <div className="max-w-6xl mx-auto px-6 md:px-12 mt-16 space-y-24">
       {/* Section 1 */}
       <motion.div 
@@ -67,6 +68,7 @@ const Body = () => {
         </div>
       </motion.div>
     </div>
+      </>
   );
 };
 

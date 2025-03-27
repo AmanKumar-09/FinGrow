@@ -4,8 +4,55 @@ import { NavLink } from "react-router-dom";
 
 
 
+const financialPoints = [
+  {
+    title: "Financial Security",
+    description: "Having savings ensures you have funds available for emergencies and unforeseen expenses.",
+  },
+  {
+    title: "Peace of Mind",
+    description: "Knowing you have a financial cushion reduces stress and anxiety about the future.",
+  },
+  {
+    title: "Helps in Achieving Financial Goals",
+    description: "Financial planning allows you to save for goals like buying a house, education, or retirement.",
+  },
+  {
+    title: "Emergency Preparedness",
+    description: "Savings act as a backup during job loss, medical emergencies, or unexpected events.",
+  },
+  {
+    title: "Avoiding Debt Traps",
+    description: "With proper planning, you rely less on loans and credit cards, reducing interest burdens.",
+  },
+  {
+    title: "Retirement Planning",
+    description: "Financial planning helps you build a retirement fund, ensuring a comfortable life post-retirement.",
+  },
+  {
+    title: "Wealth Creation",
+    description: "Regular savings and smart investments help in long-term wealth accumulation.",
+  },
+  {
+    title: "Managing Inflation",
+    description: "Proper savings and investment strategies help your money grow and beat inflation.",
+  },
+  {
+    title: "Achieving Financial Independence",
+    description: "With disciplined savings, you can reach a stage where you don’t have to depend on a paycheck.",
+  },
+  {
+    title: "Planning for Major Life Events",
+    description: "Weddings, vacations, home purchases, and other milestones are easier to manage with planned finances.",
+  },
+];
+
+
+
 const FinancialFreedom = () => {
   return (
+    <>
+    
     <div className="flex flex-col md:flex-row items-center justify-center  p-6 md:p-12 my-4 max-w-5xl mx-auto ">
       {/* Left Section */}
       <div className="md:w-1/2 flex flex-col items-center md:items-start  mr-6  md:text-left">
@@ -39,7 +86,20 @@ const FinancialFreedom = () => {
           ></iframe>
         </div>
       </div>
+      
     </div>
+    <div className="max-w-5xl mx-auto p-6  ">
+      <h2 className="text-4xl font-bold text-center text-gray-800 mb-6">💰 Financial Planning Benefits</h2>
+      <ul className="space-y-4">
+        {financialPoints.map((point, index) => (
+          <li key={index} className="p-7 hover:scale-95 duration-100 shadow-sm hover:shadow-md transition">
+            <span className="text-2xl font-semibold text-gray-600">{point.title}: </span>
+            <span className="text-lg text-gray-800">{point.description}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    </>
   );
 };
 

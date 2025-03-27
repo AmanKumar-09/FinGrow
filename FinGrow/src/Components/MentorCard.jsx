@@ -2,6 +2,7 @@ import React from "react";
 import { FaStar, FaCheckCircle } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import mentor1 from "../assets/img/mentors1.jpg";
+// import mentor1 from "../assets/img/Fingrow.png";
 
 const mentorsData = [
   {

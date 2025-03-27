@@ -48,7 +48,7 @@ function GetLoan() {
             <p className="font-bold text-lg">I am borrowing</p>
             <div className="flex justify-between text-gray-500 text-sm">
               <span>₹1,000</span>
-              <span>₹40,000</span>
+              <span>₹20,000</span>
             </div>
             <input
               type="range"
