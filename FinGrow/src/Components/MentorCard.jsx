@@ -74,21 +74,21 @@ const MentorCard = () => {
           {/* Profile Image */}
           <img
             src={mentor1}
-            className="w-24 h-24 rounded-full border-4 border-blue-800"
+            className="w-24 h-24 rounded-full  "
             alt="Mentor"
           />
 
           {/* Details Section */}
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold text-blue-700">{mentor.name}</h2>
-              <FaCheckCircle className="text-blue-600" />
+              <h2 className="text-xl font-bold ">{mentor.name}</h2>
+              <FaCheckCircle className="text-green-600" />
             </div>
             <p className="text-sm text-gray-500">{mentor.qualification}</p>
             <p className="text-yellow-500 flex items-center gap-1">
               <FaStar /> {mentor.rating} Ratings
             </p>
-            <p className="text-blue-600">{mentor.sessionDuration}</p>
+            <p className="">{mentor.sessionDuration}</p>
             <p className="text-gray-600 mt-2">{mentor.description}</p>
 
             {/* Expertise */}

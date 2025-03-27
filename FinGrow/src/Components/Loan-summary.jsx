@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Loaninfo from "./LoanInfo";
 import Progressbar from "./ProgressBar";
+import { useSearchParams } from "react-router-dom";
 // import { Route, Routes, Link } from "react-router-dom";
 // import UserForm from './UserForm'; // Import the UserForm component
 // import AdharCard from './adhar-card'; // Import the adhar-card component
@@ -9,6 +10,12 @@ import Progressbar from "./ProgressBar";
 // import "./Loan.css";
 
 const LoanForm =()=> {
+
+  const [searchParams] = useSearchParams();
+  const amount = searchParams.get("amount");
+  const totalRepayment = searchParams.get("totalRepayment");
+
+
   const [pan, setPan] = useState("");
   const [error, setError] = useState("");
 
@@ -23,7 +30,7 @@ const LoanForm =()=> {
   };
   return (
     <div className="flex flex-col items-center min-h-screen p-5">
-      < Loaninfo/>
+      <Loaninfo amount={amount} totalRepayment={totalRepayment} />
 
       <Progressbar currentStep={2}/>
 
@@ -41,12 +48,13 @@ const LoanForm =()=> {
           {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
 
           <div className="flex justify-between mt-3">
-            <Link to={"/Basic-verify"}>
+          <Link to={`/Basic-verify?amount=${amount}&totalRepayment=${totalRepayment}`}>      
               <button type="button" className="bg-red-500 text-white py-3 px-8 rounded-full transition duration-300 hover:bg-red-700">
                 Back
               </button>
               </Link>
-            <Link to={"/Aadhar-verify"}>
+            {/* <Link to={"/Aadhar-verify"}> */}
+            <Link to={`/Aadhar-verify?amount=${amount}&totalRepayment=${totalRepayment}`}>      
             <button type="submit" className="bg-blue-500 text-white py-3 px-16 rounded-full transition duration-300 hover:bg-blue-700">
               Next
             </button>

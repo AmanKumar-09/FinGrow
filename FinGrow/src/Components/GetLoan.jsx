@@ -5,14 +5,19 @@ import { Link } from "react-router-dom";
 import Loaninfo from "./LoanInfo";
 import Chatbot from "./ChatBot";
 
+
 function GetLoan() {
-  const [amount, setAmount] = useState(40000);
+  
+  const [amount, setAmount] = useState(5000);
   const [phone, setPhone] = useState("");
   const [count, setCount] = useState(0)
+
+  
 
 
   useEffect(() => {
     <Loaninfo amount={amount} totalRepayment={totalRepayment} />
+    
   }, [count]); 
 
 
@@ -89,7 +94,7 @@ function GetLoan() {
           <p className="text-white text-xs text-center mt-2">
             Enter your mobile number
           </p>
-          <Link to="/Basic-verify">        
+          <Link to={`/Basic-verify?amount=${amount}&totalRepayment=${totalRepayment}`}>        
 
 
           <button

@@ -2,8 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Loaninfo from "./LoanInfo";
 import Progressbar from "./ProgressBar";
+import { useSearchParams } from "react-router-dom";
 
 const UserForm=()=> {
+   
+  const [searchParams] = useSearchParams();
+  const amount = searchParams.get("amount");
+  const totalRepayment = searchParams.get("totalRepayment");
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -22,7 +28,7 @@ const UserForm=()=> {
 
   return (
     <div className="flex flex-col items-center min-h-screen p-5">
-      <Loaninfo/>
+       <Loaninfo amount={amount} totalRepayment={totalRepayment} />
 
       <Progressbar currentStep={1}/>
 
@@ -59,7 +65,8 @@ const UserForm=()=> {
               Back
             </button>
             </Link>
-            <Link to="/Pan-Verify">
+            {/* <Link to="/Pan-Verify"> */}
+            <Link to={`/Pan-Verify?amount=${amount}&totalRepayment=${totalRepayment}`}>
             <button
               type="submit"
               className="bg-blue-500 text-white px-[150px] py-4 rounded-full transition hover:bg-blue-700 mt-[70px] mb-[60px]"

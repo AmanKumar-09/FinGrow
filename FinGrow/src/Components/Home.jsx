@@ -6,7 +6,7 @@ import Carousel from './Carousel.jsx'
 import Faq from '../Utils/Faq.jsx'
 import News from './News.jsx'
 import Chatbot from './ChatBot.jsx'
-import LoanCalculator from '../Utils/GeneralCalculator.jsx'
+import GeneralCalculator from './General-Calculator.jsx'
 
 function Home() {
   return (
@@ -14,6 +14,7 @@ function Home() {
      
      <Body/>
      <Carousel/>
+     <GeneralCalculator/>
      <News/>
      <LoanCalculator />
      <Faq/>

@@ -20,6 +20,8 @@ CORS(app)  # Enable CORS for all routes
 ai_suggestions_cache = {}
 stock_recommendations_cache = {}
 inr_usd_rate = DEFAULT_INR_RATE
+stock_recommendations_cache = {}
+inr_usd_rate = DEFAULT_INR_RATE
 
 # Function to convert USD to INR
 def get_usd_to_inr():
@@ -101,5 +103,5 @@ def get_investment_recommendations():
         print(f"Stock Recommendation Error: {e}")
         return jsonify({"error": f"Stock recommendation failed: {str(e)}"}), 500
 
-if __name__ == '_main_':
-    app.run(debug=True, port=5001)
+if __name__ == '__main__':
+    app.run(debug=True)
