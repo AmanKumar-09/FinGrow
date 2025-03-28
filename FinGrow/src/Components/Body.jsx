@@ -1,78 +1,123 @@
-
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import img3d from '../assets/img/img3d.gif';
-import bodyimg2 from "../assets/img/bodyimg2.png";
-import phoneimage from "../assets/img/phoneimage.png";
+import img3d from '../assets/img/img3d.jpeg';
+import bodyimg2 from "../assets/img/bodyimg2.jpeg";
+import phoneimage from "../assets/img/phoneimage.jpg";
 import { NavLink } from 'react-router-dom';
+
+// Slide-in effect for images only
+const slideUpVariants = {
+  hidden: { opacity: 0, y: 80 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 1.2, ease: "easeOut" } 
+  }
+};
+
+// Letter-by-letter animation for text
+const letterVariants = {
+  hidden: { opacity: 0 },
+  visible: (index) => ({
+    opacity: 1,
+    transition: { delay: index * 0.05 } // Delay each letter for effect
+  })
+};
+
+// Animated text component (keeps letter animation)
+const AnimatedText = ({ text }) => (
+  <motion.h1 
+    className="text-4xl font-bold text-gray-900 leading-snug"
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: false, amount: 0.3 }} 
+  >
+    {text.split("").map((char, index) => (
+      <motion.span key={index} custom={index} variants={letterVariants}>
+        {char}
+      </motion.span>
+    ))}
+  </motion.h1>
+);
 
 const Body = () => {
   return (
-    <>
-    <div className="max-w-6xl mx-auto px-6 md:px-12 mt-16 space-y-24">
+    <div className="max-w-6xl mx-auto px-6 md:px-12 mt-16 space-y-16">
+      
       {/* Section 1 */}
-      <motion.div 
-        className="flex flex-col md:flex-row items-center gap-16"
-        whileHover={{ x: -10, scale: 1.05, transition: { duration: 0.3 } }}
-      >
-        <div className="md:w-1/2 flex justify-start w-full"> 
-          <img src={img3d} className="w-96 h-96 rounded-md object-cover" alt="3D Illustration" />
-        </div>
+      <div className="flex flex-col md:flex-row items-center gap-16">
+        <motion.div 
+          className="md:w-1/2 flex justify-start w-full"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={slideUpVariants}
+        > 
+          <img src={img3d} className="mix-blend-multiply w-96 h-96 rounded-md object-cover" alt="3D Illustration" />
+        </motion.div>
         <div className="md:w-1/2 md:text-left space-y-4">
-          <h1 className="text-4xl font-bold text-gray-900 leading-snug">Empowering Your Financial Growth!</h1>
+          <AnimatedText text="Empowering Your Financial Growth!" />
           <p className="text-gray-600 text-lg">
             Take control of your financial future with smart investment insights, instant loan options, and expert financial planning.
           </p>
-          <NavLink to={"/KnowMore"} className="inline-block no-underline bg-blue-600 hover:bg-blue-700 text-white font-semibold px-10 py-2 rounded-2xl text-lg transition-all">
+          <NavLink to={"/KnowMore"} className="inline-block no-underline bg-green-500 hover:bg-green-700 text-white font-semibold px-10 py-2 rounded-2xl text-lg transition-all">
             Know Us
           </NavLink>
         </div>
-      </motion.div>
+      </div>
 
       {/* Section 2 */}
-      <motion.div 
-        className="flex flex-col md:flex-row-reverse items-center gap-16"
-        whileHover={{ x: 10, scale: 1.05, transition: { duration: 0.3 } }}
-      >
-        <div className="md:w-1/2 flex justify-end">
+      <div className="flex flex-col md:flex-row-reverse items-center">
+        <motion.div 
+          className="md:w-1/2 flex justify-end"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={slideUpVariants}
+        >
           <img src={bodyimg2} className="w-96 h-96 rounded-md object-cover" alt="Financial Planning" />
-        </div>
+        </motion.div>
         <div className="md:w-1/2 md:text-left space-y-4">
-          <h1 className="text-4xl font-bold text-gray-900 leading-snug">Personalized Financial Planning Made Easy!</h1>
-          <p className="text-gray-600 text-lg">Financial success starts with a solid plan! Track your income, manage expenses, and discover smart saving opportunities.</p>
-          <NavLink to={"/FinancialFreedom"} className="inline-block no-underline bg-blue-600 hover:bg-blue-700 text-white font-semibold px-10 py-2 rounded-2xl text-lg transition-all">
+          <AnimatedText text="Personalized Financial Planning Made Easy!" />
+          <p className="text-gray-600 text-lg">
+            Financial success starts with a solid plan! Track your income, manage expenses, and discover smart saving opportunities.
+          </p>
+          <NavLink to={"/FinancialFreedom"} className="inline-block no-underline bg-green-500 hover:bg-green-700 text-white font-semibold px-10 py-2 rounded-2xl text-lg transition-all">
             Know Us
           </NavLink>
         </div>
-      </motion.div>
+      </div>
 
       {/* Section 3 */}
-      <motion.div 
-        className="flex flex-col md:flex-row items-center gap-16"
-        whileHover={{ y: -10, scale: 1.05, transition: { duration: 0.3 } }}
-      >
-        <div className="md:w-1/2 flex justify-left">
-          <img src={phoneimage} className="w-96 h-[550px] rounded-md object-cover" alt="Loan Offers" />
-        </div>
+      <div className="flex flex-col md:flex-row items-center gap-16">
+        <motion.div 
+          className="md:w-1/2 flex justify-left"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={slideUpVariants}
+        >
+          <img src={phoneimage} className="relative left-10 w-96 h-[400px] rounded-md object-cover" alt="Loan Offers" />
+        </motion.div>
         <div className="md:w-1/2 md:text-left space-y-4">
-          <h1 className="text-4xl font-bold text-gray-900 leading-snug">Getting Started with a Personalized Financial Plan</h1>
+          <AnimatedText text="Getting Started with a Personalized Financial Plan" />
           <ol className="mt-6 space-y-6 text-left">
-            {["Let us know your financials", "Define your key life goals", "Get a plan to achieve your life goals", "Act & course correct when needed"].map((step, index) => (
+            {[
+              "Let us know your financials",
+              "Define your key life goals",
+              "Get a plan to achieve your life goals",
+              "Act & course correct when needed"
+            ].map((step, index) => (
               <li key={index} className="flex items-start gap-4">
-                <span className="bg-gray-900 text-white px-4 py-2 rounded-full font-semibold">{index + 1}</span>
+                <span className="bg-green-500 text-white px-4 py-2 rounded-full font-semibold">{index + 1}</span>
                 <p className="font-semibold text-gray-900 text-lg">{step}</p>
               </li>
             ))}
           </ol>
         </div>
-      </motion.div>
+      </div>
     </div>
-      </>
   );
 };
 
 export default Body;
-
-
-// code by simar jit singh
