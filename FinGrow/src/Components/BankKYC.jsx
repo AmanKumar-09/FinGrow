@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import Loaninfo from './LoanInfo';
 import Progressbar from './ProgressBar';
-
+import { useSearchParams } from "react-router-dom";
 const BankDetails = () => {
+  const [searchParams] = useSearchParams();
+  const amount = searchParams.get("amount");
+  const totalRepayment = searchParams.get("totalRepayment");
+
+
+
   const [accountNumber, setAccountNumber] = useState("");
   const [ifscCode, setIfscCode] = useState("");
   const [bankName, setBankName] = useState("");
@@ -21,7 +27,8 @@ const BankDetails = () => {
 
   return (
     <div className="flex flex-col items-center min-h-screen p-5">
-      < Loaninfo/>
+        <Loaninfo amount={amount} totalRepayment={totalRepayment} />
+
 
       <Progressbar currentStep={4}/>
 
@@ -55,7 +62,8 @@ const BankDetails = () => {
           {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
 
           <div className="flex justify-between mt-4">
-            <Link to={"/Aadhar-verify"}>
+            
+            <Link to={`/Aadhar-verify?amount=${amount}&totalRepayment=${totalRepayment}`}>
             <button className="px-8 py-4 bg-red-500 text-white rounded-full transition hover:bg-red-700">Back</button>
             </Link>
             <Link to={"/"}>

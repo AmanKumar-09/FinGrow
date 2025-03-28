@@ -6,6 +6,12 @@ export default {
   ],
   theme: {
     extend: {
+      animation: {
+        borderTrace: 'borderTrace 3s linear infinite',
+      },
+      animation: {
+        borderTrace: 'borderTrace 3s linear infinite',
+      },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         dancing: ["Dancing Script", "cursive"],

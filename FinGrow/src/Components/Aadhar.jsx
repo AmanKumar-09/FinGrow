@@ -2,8 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Loaninfo from "./LoanInfo";
 import Progressbar from "./ProgressBar";
+import { useSearchParams } from "react-router-dom";
 
 const Aadhar=()=> {
+    const [searchParams] = useSearchParams();
+    const amount = searchParams.get("amount");
+    const totalRepayment = searchParams.get("totalRepayment");
+
   const [pan, setPan] = useState("");
   const [error, setError] = useState("");
 
@@ -19,7 +24,7 @@ const Aadhar=()=> {
 
   return (
     <div className="flex flex-col items-center min-h-screen p-5">
-      < Loaninfo/>
+     <Loaninfo amount={amount} totalRepayment={totalRepayment} />
 
       <Progressbar currentStep={3}/>
 
@@ -38,7 +43,7 @@ const Aadhar=()=> {
 
           {/* Buttons */}
           <div className="flex justify-between mt-6">
-          <Link to={"/Pan-Verify"}>
+          <Link to={`/Pan-Verify?amount=${amount}&totalRepayment=${totalRepayment}`}>
             <button
               type="button"
               className="bg-red-500 text-white px-10 py-4 rounded-full transition hover:bg-red-700"
@@ -46,7 +51,8 @@ const Aadhar=()=> {
               Back
             </button>
             </Link>
-            <Link to={"/Bank-verify"}>
+            {/* <Link to={"/Bank-verify"}> */}
+            <Link to={`/Bank-verify?amount=${amount}&totalRepayment=${totalRepayment}`}>
             <button
               type="submit"
               className="bg-blue-500 text-white px-20 py-4 rounded-full transition hover:bg-blue-700"

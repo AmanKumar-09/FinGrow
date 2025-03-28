@@ -17,7 +17,7 @@ const Header = () => {
         <>
             <div className='flex justify-between pb-2 shadow-md '>
                 <div>
-                    <img className='w-40' src={logo} alt="logo" />
+                    <img className='w-40 h-40' src={logo} alt="logo" />
                 </div>
                 <nav className='flex list-none gap-12 items-center justify-center text-xl pr-12'>
                     {links.map((link, index) => (
