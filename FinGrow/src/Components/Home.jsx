@@ -16,7 +16,6 @@ function Home() {
      <Carousel/>
      <GeneralCalculator/>
      <News/>
-     <LoanCalculator />
      <Faq/>
      <Chatbot/>
      

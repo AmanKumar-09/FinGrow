@@ -5,9 +5,8 @@ const Chatbot = () => {
     const script = document.createElement("script");
     script.src = "https://www.chatbase.co/embed.min.js";
     script.defer = true;
-    script.setAttribute("chatbotId", "1HeJK6Pn9PF7HScvhUDum");
+    script.setAttribute("chatbotId", "DJUWdnWOJoYI8hq_2butg");
     script.setAttribute("domain", "www.chatbase.co");
-
     document.body.appendChild(script);
 
     return () => {

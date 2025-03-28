@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import FinlogixWidget from "../Utils/Graphs";
 
 const Suggestion = () => {
   const [salary, setSalary] = useState("");
@@ -141,6 +142,7 @@ const Suggestion = () => {
           </ul>
         </div>
       )}
+      <FinlogixWidget />
     </div>
   );
 };
