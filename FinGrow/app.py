@@ -20,6 +20,8 @@ CORS(app)  # Enable CORS for all routes
 ai_suggestions_cache = {}
 stock_recommendations_cache = {}
 inr_usd_rate = DEFAULT_INR_RATE
+stock_recommendations_cache = {}
+inr_usd_rate = DEFAULT_INR_RATE
 
 # Function to convert USD to INR
 def get_usd_to_inr():

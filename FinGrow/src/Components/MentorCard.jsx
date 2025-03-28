@@ -1,5 +1,9 @@
 import mentor1 from "../assets/img/mentors1.jpg";
+<<<<<<< HEAD
 import { FaStar, FaVideo, FaBullseye } from "react-icons/fa";
+=======
+// import mentor1 from "../assets/img/Fingrow.png";
+>>>>>>> f20bd8e200c46514d27a26749007aee54aa28538
 
 
 const mentors = [
