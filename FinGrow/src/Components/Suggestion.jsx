@@ -1,19 +1,15 @@
 import { useState, useEffect } from "react";
 
-const Suggestion = () => {
+const FinancialDashboard = () => {
   const [salary, setSalary] = useState("");
   const [houseRent, setHouseRent] = useState("");
   const [electricityBill, setElectricityBill] = useState("");
   const [groceryExpenses, setGroceryExpenses] = useState("");
   const [otherExpenses, setOtherExpenses] = useState("");
-  const [savingsGoal, setSavingsGoal] = useState("");
   const [totalSpending, setTotalSpending] = useState(0);
-  const [savings, setSavings] = useState(null);
-  const [aiSuggestion, setAiSuggestion] = useState("");
-  const [investmentRecommendations, setInvestmentRecommendations] = useState([]);
-  const [showInvestmentButton, setShowInvestmentButton] = useState(false);
+  const [dashboardData, setDashboardData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // Calculate total spending whenever any expense changes
   useEffect(() => {
     setTotalSpending(
       Number(houseRent) + Number(electricityBill) + Number(groceryExpenses) + Number(otherExpenses)
@@ -22,127 +18,175 @@ const Suggestion = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const remainingSavings = Number(salary) - totalSpending - Number(savingsGoal);
-
-    setSavings(remainingSavings); // Directly setting savings in state
+    setLoading(true);
+    const spendings = [Number(houseRent), Number(electricityBill), Number(groceryExpenses), Number(otherExpenses)];
 
     try {
-      // AI Suggestions API Call
-      const aiResponse = await fetch("http://localhost:5000/ai_suggestions", {
+      const response = await fetch("http://localhost:5000/financial_dashboard", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ savings: remainingSavings }),
+        body: JSON.stringify({ salary: Number(salary), spendings }),
       });
 
-      if (!aiResponse.ok) throw new Error("Failed to get AI suggestions.");
+      if (!response.ok) throw new Error("Failed to fetch dashboard data.");
 
-      const aiData = await aiResponse.json();
-      setAiSuggestion(aiData.suggestions);
-
-      // Show investment button
-      setShowInvestmentButton(true);
+      const data = await response.json();
+      setDashboardData(data);
     } catch (error) {
       console.error("Error:", error);
-      setAiSuggestion("Error fetching data. Please try again.");
-    }
-  };
-
-  const handleInvestmentClick = async () => {
-    try {
-      const investmentResponse = await fetch("http://localhost:5000/get_investment_recommendations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ savings: Number(savings), risk_tolerance: "medium" }),
-      });
-
-      if (!investmentResponse.ok) throw new Error("Failed to get investment recommendations.");
-
-      const investmentData = await investmentResponse.json();
-      setInvestmentRecommendations(Object.entries(investmentData.stocks));
-    } catch (error) {
-      console.error("Error:", error);
-      setInvestmentRecommendations([]);
+      setDashboardData({ error: "Error fetching dashboard data. Please try again." });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-12 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Financial Planner</h2>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl font-bold text-gray-800 mb-8 text-center">AI-Driven Financial Dashboard</h2>
 
-      <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
-        <label className="font-medium">Enter Monthly Salary (₹):</label>
-        <input type="number" value={salary} onChange={(e) => setSalary(e.target.value)} className="p-2 border border-gray-300 rounded-md" required />
+        {/* Input Form */}
+        <form className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 bg-white p-6 rounded-lg shadow-lg" onSubmit={handleSubmit}>
+          <div>
+            <label className="font-medium text-gray-700 block mb-2">Monthly Salary (₹):</label>
+            <input
+              type="number"
+              value={salary}
+              onChange={(e) => setSalary(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="font-medium text-gray-700 block mb-2">House Rent (₹):</label>
+            <input
+              type="number"
+              value={houseRent}
+              onChange={(e) => setHouseRent(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="font-medium text-gray-700 block mb-2">Electricity Bill (₹):</label>
+            <input
+              type="number"
+              value={electricityBill}
+              onChange={(e) => setElectricityBill(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="font-medium text-gray-700 block mb-2">Grocery Expenses (₹):</label>
+            <input
+              type="number"
+              value={groceryExpenses}
+              onChange={(e) => setGroceryExpenses(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="font-medium text-gray-700 block mb-2">Other Expenses (₹):</label>
+            <input
+              type="number"
+              value={otherExpenses}
+              onChange={(e) => setOtherExpenses(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="font-medium text-gray-700 block mb-2">Total Spending (₹):</label>
+            <input
+              type="number"
+              value={totalSpending}
+              readOnly
+              className="w-full p-3 border border-gray-300 rounded-md bg-gray-100"
+            />
+          </div>
+          <button
+            type="submit"
+            className="col-span-full p-4 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600 transition text-lg"
+            disabled={loading}
+          >
+            {loading ? "Loading Dashboard..." : "Generate Dashboard"}
+          </button>
+        </form>
 
-        <label className="font-medium">Enter House Rent (₹):</label>
-        <input type="number" value={houseRent} onChange={(e) => setHouseRent(e.target.value)} className="p-2 border border-gray-300 rounded-md" required />
-
-        <label className="font-medium">Enter Electricity Bill (₹):</label>
-        <input type="number" value={electricityBill} onChange={(e) => setElectricityBill(e.target.value)} className="p-2 border border-gray-300 rounded-md" required />
-
-        <label className="font-medium">Enter Grocery Expenses (₹):</label>
-        <input type="number" value={groceryExpenses} onChange={(e) => setGroceryExpenses(e.target.value)} className="p-2 border border-gray-300 rounded-md" required />
-
-        <label className="font-medium">Enter Other Expenses (₹):</label>
-        <input type="number" value={otherExpenses} onChange={(e) => setOtherExpenses(e.target.value)} className="p-2 border border-gray-300 rounded-md" required />
-
-        <label className="font-medium">Total Spending (₹):</label>
-        <input type="number" value={totalSpending} readOnly className="p-2 border border-gray-300 rounded-md bg-gray-100" />
-
-        {/* <label className="font-medium">Enter Savings Goal (₹):</label>
-        <input type="number" value={savingsGoal} onChange={(e) => setSavingsGoal(e.target.value)} className="p-2 border border-gray-300 rounded-md" required /> */}
-
-        <button type="submit" className="p-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600">
-          Get AI Suggestions
-        </button>
-      </form>
-
-      {/* Results */}
-      <div className="mt-6 p-4 bg-gray-100 rounded-md">
-        <h3 className="text-lg font-semibold text-gray-700">Results:</h3>
-        {savings !== null && <p className="text-gray-700">Your savings: ₹{savings}</p>}
-        {/* {aiSuggestion && <p className="text-gray-700">AI Suggestion: {aiSuggestion}</p>} */}
-
-        {aiSuggestion && (
-          <div className="text-gray-700">
-            <h3 className="font-semibold">AI Suggestion:</h3>
-            <ol className="list-decimal list-inside mt-2 space-y-2">
-              {aiSuggestion
-                .split('. ')
-                .filter((suggestion) => suggestion.trim() !== '') // Remove empty suggestions
-                .map((suggestion, index) => (
-                  <li key={index}>{suggestion.trim()}</li>
-                ))}
-            </ol>
+        {/* Current Savings (Outside the Box) */}
+        {dashboardData && (
+          <div className="mb-8 text-center">
+            <h3 className="text-2xl font-semibold text-gray-700">Current Savings</h3>
+            {dashboardData.error ? (
+              <p className="text-red-600 text-xl">{dashboardData.error}</p>
+            ) : (
+              <p className="text-4xl text-green-600 font-bold mt-2">₹{dashboardData.savings}</p>
+            )}
           </div>
         )}
 
+        {/* Dashboard Display */}
+        {dashboardData && !dashboardData.error && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* AI Suggestions */}
+            <div className="p-6 bg-white rounded-lg shadow-lg min-h-[300px] flex flex-col">
+              <h3 className="text-xl font-semibold text-gray-700 mb-4">AI Suggestions</h3>
+              {dashboardData.suggestions ? (
+                <ol className="list-decimal list-inside text-gray-700 flex-1">
+                  {dashboardData.suggestions
+                    .split(". ")
+                    .filter((s) => s.trim())
+                    .map((suggestion, index) => (
+                      <li key={index} className="mb-3 text-base leading-relaxed">{suggestion.trim()}</li>
+                    ))}
+                </ol>
+              ) : (
+                <p className="text-gray-500 flex-1">Suggestions not available.</p>
+              )}
+            </div>
+
+            {/* Financial Analysis */}
+            <div className="p-6 bg-white rounded-lg shadow-lg min-h-[300px] flex flex-col">
+              <h3 className="text-xl font-semibold text-gray-700 mb-4">Financial Analysis</h3>
+              {dashboardData.predicted_savings && dashboardData.analysis ? (
+                <div className="flex-1">
+                  <p className="text-gray-700 text-lg mb-4">
+                    Predicted Savings Next Month: <span className="font-semibold">{dashboardData.predicted_savings}</span>
+                  </p>
+                  <ol className="list-decimal list-inside text-gray-700">
+                    {dashboardData.analysis
+                      .split(". ")
+                      .filter((s) => s.trim())
+                      .map((insight, index) => (
+                        <li key={index} className="mb-3 text-base leading-relaxed">{insight.trim()}</li>
+                      ))}
+                  </ol>
+                </div>
+              ) : (
+                <p className="text-gray-500 flex-1">No analysis available.</p>
+              )}
+            </div>
+
+            {/* Investment Recommendations */}
+            <div className="p-6 bg-white rounded-lg shadow-lg min-h-[300px] flex flex-col lg:col-span-2">
+              <h3 className="text-xl font-semibold text-gray-700 mb-4">Investment Recommendations</h3>
+              {dashboardData.stocks && dashboardData.stocks.length > 0 ? (
+                <ul className="list-disc list-inside text-gray-700 flex-1">
+                  {dashboardData.stocks.map((stock, index) => (
+                    <li key={index} className="mb-3 text-base leading-relaxed">{stock}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500 flex-1">No recommendations available.</p>
+              )}
+            </div>
+          </div>
+        )}
       </div>
-
-      {/* Investment Button */}
-      {showInvestmentButton && (
-        <button
-          onClick={handleInvestmentClick}
-          className="mt-4 p-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition"
-        >
-          Get Investment Recommendations
-        </button>
-      )}
-
-      {/* Investment Recommendations */}
-      {investmentRecommendations.length > 0 && (
-        <div className="mt-6 p-4 bg-gray-100 rounded-md">
-          <h3 className="text-lg font-semibold text-gray-700">Investment Recommendations:</h3>
-          <ul className="list-disc list-inside text-gray-700">
-            {investmentRecommendations.map(([symbol, price], index) => (
-              <li key={index}>
-                {symbol}: {price}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 };
 
-export default Suggestion;
+export default FinancialDashboard;
