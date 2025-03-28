@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import Profile from "./Profile"; // Import your Profile component
-
+import Home from "./Home";
 const Signup = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -33,18 +33,21 @@ const Signup = () => {
           email: email.current?.value,
           password: password.current?.value,
         });
-        alert("Signup successfully");
+
+        // Save authentication state after successful signup
+        localStorage.setItem("isAuthenticated", "true");
+        setIsAuthenticated(true); // Update state to trigger rendering of Profile
+        alert("Signup successful!");
       } else {
         const response = await axios.post("/api/v1/users/login", {
           email: email.current?.value,
           password: password.current?.value,
         });
 
-        alert("Signin successfully!");
-
-        // Save authentication state
+        // Save authentication state after successful sign-in
         localStorage.setItem("isAuthenticated", "true");
         setIsAuthenticated(true);
+        alert("Signin successful!");
       }
     } catch (err) {
       console.log("Error:", err.response ? err.response.data : err.message);
@@ -54,7 +57,7 @@ const Signup = () => {
   };
 
   if (isAuthenticated) {
-    return <Profile />; // Show Profile page if authenticated
+    return <Home />; // Show Profile page if authenticated
   }
 
   return (
@@ -82,24 +85,44 @@ const Signup = () => {
           {isSignUp && (
             <div>
               <label className="text-gray-700 font-medium">Full Name</label>
-              <input type="text" ref={name} className="w-full px-3 py-2 border rounded-lg focus:ring-2" required />
+              <input
+                type="text"
+                ref={name}
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2"
+                required
+              />
             </div>
           )}
 
           <div>
             <label className="text-gray-700 font-medium">Email</label>
-            <input type="email" ref={email} className="w-full px-3 py-2 border rounded-lg focus:ring-2" required />
+            <input
+              type="email"
+              ref={email}
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2"
+              required
+            />
           </div>
 
           <div>
             <label className="text-gray-700 font-medium">Password</label>
-            <input type="password" ref={password} className="w-full px-3 py-2 border rounded-lg focus:ring-2" required />
+            <input
+              type="password"
+              ref={password}
+              className="w-full px-3 py-2 border rounded-lg focus:ring-2"
+              required
+            />
           </div>
 
           {isSignUp && (
             <div>
               <label className="text-gray-700 font-medium">Confirm Password</label>
-              <input type="password" ref={confirmPassword} className="w-full px-3 py-2 border rounded-lg focus:ring-2" required />
+              <input
+                type="password"
+                ref={confirmPassword}
+                className="w-full px-3 py-2 border rounded-lg focus:ring-2"
+                required
+              />
             </div>
           )}
 
