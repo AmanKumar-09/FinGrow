@@ -1,5 +1,7 @@
 import mentor1 from "../assets/img/mentors1.jpg";
+
 import { FaStar, FaVideo, FaBullseye } from "react-icons/fa";
+
 
 
 const mentors = [

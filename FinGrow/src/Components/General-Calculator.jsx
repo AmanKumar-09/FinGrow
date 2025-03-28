@@ -33,11 +33,11 @@ const GeneralCalculator = () => {
 
   const data = [
     { name: "Principal", value: loanAmount, color: "#FFC107" },
-    { name: "Interest", value: interestAmount, color: "#1976D2" },
+    { name: "Interest", value: interestAmount, color: "#66BB6A" },
   ];
 
   return (
-    <div className="flex flex-col md:flex-row p-6 max-w-4xl mx-auto bg-white rounded-xl shadow-md space-x-6">
+    <div className="flex flex-col md:flex-row p-6 max-w-5xl mx-auto bg-white rounded-xl shadow-md space-x-6 mb-20">
       {/* Left Side - Loan Calculator */}
       <div className="w-full md:w-2/3 space-y-6">
         {/* Loan Amount */}
@@ -49,11 +49,11 @@ const GeneralCalculator = () => {
             <div className="flex items-center bg-gray-100 rounded-lg px-2 py-1">
               <input
                 type="text"
-                className="bg-transparent px-3 py-2 w-24 text-left outline-none"
+                className=" bg-transparent px-3 py-2 w-24 text-left outline-none"
                 value={loanAmount.toLocaleString("en-IN")}
                 readOnly
               />
-              <span className="ml-2 bg-gray-200 py-2 px-3 rounded-lg text-gray-700">
+              <span className="ml-2 bg-green-500 py-2 px-3 rounded-lg text-white">
                 ₹
               </span>
             </div>
@@ -65,7 +65,7 @@ const GeneralCalculator = () => {
             step="1000"
             value={loanAmount}
             onChange={(e) => setLoanAmount(parseInt(e.target.value))}
-            className="w-full mt-3"
+            className="w-full mt-3 bg-green-500"
           />
             <div className="flex justify-between text-sm text-gray-600">
             <span>1K</span> <span>5k</span> <span>10k</span> <span>20k</span> <span>30k</span> <span>40k</span>
@@ -79,13 +79,13 @@ const GeneralCalculator = () => {
               Rate Of Interest <span className="text-yellow-500">?</span>
             </label>
             <div className="flex items-center bg-gray-100 rounded-lg px-2 py-1">
-              <input
+              <input 
                 type="text"
-                className="bg-transparent px-3 py-2 w-24 text-left outline-none"
+                className="bg-transparent px-3 py-2 w-24 text-left outline-none "
                 value={interestRate}
                 readOnly
               />
-              <span className="ml-2 bg-gray-200 py-2 px-3 rounded-lg text-gray-700">
+              <span className="ml-2 bg-green-500 py-2 px-3 rounded-lg text-white">
                 %
               </span>
             </div>
@@ -121,8 +121,8 @@ const GeneralCalculator = () => {
                 <button
                   className={`px-2 py-1 rounded-md text-sm ${
                     tenureType === "Mo"
-                      ? "bg-gray-400 text-white"
-                      : "text-gray-600"
+                      ? "bg-green-500 text-white"
+                      : " text-gray-600"
                   }`}
                   onClick={() => setTenureType("Mo")}
                 >
@@ -131,7 +131,7 @@ const GeneralCalculator = () => {
                 <button
                   className={`px-2 py-1 rounded-md text-sm ${
                     tenureType === "Yr"
-                      ? "bg-gray-400 text-white"
+                      ? "bg-green-500 text-white"
                       : "text-gray-600"
                   }`}
                   onClick={() => setTenureType("Yr")}

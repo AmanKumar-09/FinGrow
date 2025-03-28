@@ -7,3 +7,24 @@
 body {
     @apply font-poppins;
   }
+
+  @keyframes spin-border {
+    from {
+      --angle: 0deg;
+    }
+    to {
+      --angle: 360deg;
+    }
+  }
+  
+  .before\:animate-spin-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 4px;
+    background: conic-gradient(from var(--angle), #32cd32, #66BB6A, #FFC107);
+    mask-composite: exclude;
+    animation: spin-border 4s linear infinite;
+  }
+  
