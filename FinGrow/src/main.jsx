@@ -19,6 +19,8 @@ import MentorCard from './Components/MentorCard.jsx'
 import FinancialFreedom from './Components/FinancialFreedom.jsx'
 import Profile from './Components/Profile.jsx'
 import GeneralCalculator from './Components/General-Calculator.jsx'
+import GoalSavingPlanner from './Utils/GoalSavingPlanner.jsx'
+// import Profile from './Components/Profile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: '/suggestion',
         element: <Suggestion />
+      },
+      {
+        path: '/KnowMore/Signup',
+        element: <Signup />
       },
       {
         path: '/Signup',
@@ -88,6 +94,10 @@ const router = createBrowserRouter([
       {
         path: '/General-Calculator',
         element: <GeneralCalculator/>
+      },
+      {
+        path:'/GoalSavingPlanner',
+        element:<GoalSavingPlanner/>
       }
     ]
 

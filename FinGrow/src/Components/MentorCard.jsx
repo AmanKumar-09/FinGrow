@@ -1,5 +1,8 @@
 import mentor1 from "../assets/img/mentors1.jpg";
+
 import { FaStar, FaVideo, FaBullseye } from "react-icons/fa";
+
+
 
 const mentors = [
   {
@@ -100,8 +103,9 @@ const MentorList = () => {
       {mentors.map((mentor, index) => (
         <MentorCard key={index} mentor={mentor} />
       ))}
+   
     </div>
   );
 };
 
-export default MentorList;
+export default MentorList;
