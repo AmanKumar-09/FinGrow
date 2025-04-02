@@ -4,12 +4,22 @@ import Loaninfo from "./LoanInfo";
 import Progressbar from "./ProgressBar";
 import { useSearchParams } from "react-router-dom";
 
-const Aadhar=()=> {
-    const [searchParams] = useSearchParams();
-    const amount = searchParams.get("amount");
-    const totalRepayment = searchParams.get("totalRepayment");
 
-  const [pan, setPan] = useState("");
+const Aadhar=()=> {
+  const [searchParams] = useSearchParams();
+  const amount = searchParams.get("amount");
+  const totalRepayment = searchParams.get("totalRepayment");
+  const firstName = searchParams.get("firstName")
+  const lastName = searchParams.get("lastName")
+  const address = searchParams.get("address")
+  const monthlyIncome = searchParams.get("monthlyIncome")
+  const email = searchParams.get("email")
+  const pan = searchParams.get("pan")
+
+ 
+
+
+  const [aadhaar, setaadhaar] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
@@ -21,6 +31,9 @@ const Aadhar=()=> {
       // Proceed to next step
     }
   };
+
+  const nextPageUrl = `/Bank-verify?amount=${encodeURIComponent(amount)}&totalRepayment=${encodeURIComponent(totalRepayment)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&address=${encodeURIComponent(address)}&monthlyIncome=${encodeURIComponent(monthlyIncome)}&email=${encodeURIComponent(email)}&pan=${encodeURIComponent(pan)}&aadhaar=${encodeURIComponent(aadhaar)}`;
+
 
   return (
     <div className="flex flex-col items-center min-h-screen p-5">
@@ -35,8 +48,8 @@ const Aadhar=()=> {
           <label className="block font-bold mb-2">Adhar Id:*</label>
           <input
             type="text"
-            value={pan}
-            onChange={(e) => setPan(e.target.value)}
+            value={aadhaar}
+            onChange={(e) => setaadhaar(e.target.value)}
             className="w-full p-2 border-b-2 border-black outline-none"
           />
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
@@ -52,7 +65,7 @@ const Aadhar=()=> {
             </button>
             </Link>
             {/* <Link to={"/Bank-verify"}> */}
-            <Link to={`/Bank-verify?amount=${amount}&totalRepayment=${totalRepayment}`}>
+            <Link to={nextPageUrl}>
             <button
               type="submit"
               className="bg-blue-500 text-white px-20 py-4 rounded-full transition hover:bg-blue-700"

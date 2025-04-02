@@ -14,7 +14,12 @@ const LoanForm =()=> {
   const [searchParams] = useSearchParams();
   const amount = searchParams.get("amount");
   const totalRepayment = searchParams.get("totalRepayment");
-
+  const firstName = searchParams.get("firstName")
+  const lastName = searchParams.get("lastName")
+  const address = searchParams.get("address")
+  const monthlyIncome = searchParams.get("monthlyIncome")
+  const email = searchParams.get("email")
+ 
 
   const [pan, setPan] = useState("");
   const [error, setError] = useState("");
@@ -28,6 +33,10 @@ const LoanForm =()=> {
       // Proceed to next step
     }
   };
+
+  const nextPageUrl = `/Aadhar-verify?amount=${encodeURIComponent(amount)}&totalRepayment=${encodeURIComponent(totalRepayment)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&address=${encodeURIComponent(address)}&monthlyIncome=${encodeURIComponent(monthlyIncome)}&email=${encodeURIComponent(email)}&pan=${encodeURIComponent(pan)}`;
+
+
   return (
     <div className="flex flex-col items-center min-h-screen p-5">
       <Loaninfo amount={amount} totalRepayment={totalRepayment} />
@@ -54,7 +63,7 @@ const LoanForm =()=> {
               </button>
               </Link>
             {/* <Link to={"/Aadhar-verify"}> */}
-            <Link to={`/Aadhar-verify?amount=${amount}&totalRepayment=${totalRepayment}`}>      
+            <Link to={nextPageUrl}>      
             <button type="submit" className="bg-blue-500 text-white py-3 px-16 rounded-full transition duration-300 hover:bg-blue-700">
               Next
             </button>
