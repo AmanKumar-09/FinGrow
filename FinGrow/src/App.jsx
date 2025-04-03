@@ -5,8 +5,7 @@ import { Outlet } from 'react-router-dom'
 
 import Header from './Components/Header.jsx'
 import Footer from './Components/Footer.jsx'
-import Profile
- from './Components/Profile.jsx'
+import Profile from './Components/Profile.jsx'
 function App() {
 
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -16,7 +15,7 @@ function App() {
   };
 
   return (
-    <div className="font-poppins">  {/* Apply font globally */}
+    <div className="font-poppins ">  {/* Apply font globally */}
       {/* <Header /> */}
       {/* Header is always visible */}
       <Header toggleProfile={toggleProfile} isProfileOpen={isProfileOpen} />
