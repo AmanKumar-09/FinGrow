@@ -9,6 +9,7 @@ const UserForm=()=> {
   const [searchParams] = useSearchParams();
   const amount = searchParams.get("amount");
   const totalRepayment = searchParams.get("totalRepayment");
+  const repaymentDate = searchParams.get("repaymentDate")
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -27,7 +28,7 @@ const UserForm=()=> {
     }
   };
 
-  const nextPageUrl = `/Pan-Verify?amount=${encodeURIComponent(amount)}&totalRepayment=${encodeURIComponent(totalRepayment)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&address=${encodeURIComponent(address)}&monthlyIncome=${encodeURIComponent(monthlyIncome)}&email=${encodeURIComponent(email)}`;
+  const nextPageUrl = `/Pan-Verify?amount=${encodeURIComponent(amount)}&totalRepayment=${encodeURIComponent(totalRepayment)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&address=${encodeURIComponent(address)}&monthlyIncome=${encodeURIComponent(monthlyIncome)}&email=${encodeURIComponent(email)}&repaymentDate=${repaymentDate}`;
 
   return (
     <div className="flex flex-col items-center min-h-screen p-5">

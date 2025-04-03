@@ -69,11 +69,11 @@ if (existingKyc) {
 })
 
 const kycstatus = asynchandler(async(req,res) =>{
-   const{email} = req.body;
-   if(!email){
+   const{phone} = req.body;
+   if(!phone){
       return new Apierror(401,"user email not found, please sign in");
    }
-   const existingKyc = await Kycinfo.findOne({email});
+   const existingKyc = await Kycinfo.findOne({phone});
 
    if(existingKyc){
       return res.status(200).json(
@@ -82,7 +82,7 @@ const kycstatus = asynchandler(async(req,res) =>{
    }
 
    return res.status(200).json(
-      new Apiresponse(200,null, "NoKyc found,please complete your KYC ")
+      new Apiresponse(200,null, "No Kyc found,please complete your KYC ")
    )
    
 })

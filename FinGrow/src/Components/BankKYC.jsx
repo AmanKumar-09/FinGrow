@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Loaninfo from './LoanInfo';
 import Progressbar from './ProgressBar';
@@ -11,16 +11,17 @@ const BankDetails = () => {
   
   const amount = searchParams.get("amount") || "50000";
   const totalRepayment = searchParams.get("totalRepayment") || "55000";
-  const firstName = searchParams.get("firstName") || "John";
-  const lastName = searchParams.get("lastName") || "Doe";
-  const address = searchParams.get("address") || "123 Main St, Mumbai, Maharashtra, India, 400001";
-  const monthlyIncome = Number(searchParams.get("monthlyIncome") || "60000");
-  const email = searchParams.get("email") || "john.doe@example.com";
-  const panid = searchParams.get("pan") || "ABCDE1234F";
-  const aadhaarid = searchParams.get("aadhaar") || "123456789012";
+  const firstName = searchParams.get("firstName") || "Nikhiil";
+  const lastName = searchParams.get("lastName") || "Kumarar";
+  const address = searchParams.get("address") || "1232 civil city, Ludhiana, Punjab, India, 141000";
+  const monthlyIncome = Number(searchParams.get("monthlyIncome") || "70000");
+  const email = searchParams.get("email") || "Nikhiil.doe@example.com";
+  const panid = searchParams.get("pan") || "ABCDE1890F";
+  const aadhaarid = searchParams.get("aadhaar") || "123450227092";
+  const repaymentDate = searchParams.get("repaymentDate")
 
-  const [accountno, setAccountNumber] = useState("123456789012");
-  const [IFSCcode, setIfscCode] = useState("HDFC0001234");
+  const [accountno, setAccountNumber] = useState("103422707012");
+  const [IFSCcode, setIfscCode] = useState("HDFC0001028");
   const [bankname, setBankName] = useState("HDFC Bank");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -117,13 +118,13 @@ const BankDetails = () => {
                 Back
               </button>
             </Link>
-            <button 
-              type="submit" 
+            <NavLink 
+              to="/LoanConfirmation?amount=${amount}&totalRepayment=${totalRepayment}"
               className="px-8 py-4 bg-blue-500 text-white rounded-full transition hover:bg-blue-700 disabled:bg-blue-300"
               disabled={isLoading}
             >
               {isLoading ? 'Submitting...' : 'Submit'}
-            </button>
+            </NavLink>
           </div>
         </form>
       </div>

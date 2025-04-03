@@ -20,6 +20,7 @@ import FinancialFreedom from './Components/FinancialFreedom.jsx'
 import Profile from './Components/Profile.jsx'
 import GeneralCalculator from './Components/General-Calculator.jsx'
 import GoalSavingPlanner from './Utils/GoalSavingPlanner.jsx'
+import LoanConfirmation from './Components/LoanConfirmation.jsx'
 // import Profile from './Components/Profile.jsx'
 
 const router = createBrowserRouter([
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
       {
         path:'/GoalSavingPlanner',
         element:<GoalSavingPlanner/>
+      },
+      {
+        path:"/LoanConfirmation",
+        element:<LoanConfirmation/>
       }
     ]
 

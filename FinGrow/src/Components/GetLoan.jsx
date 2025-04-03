@@ -1,36 +1,74 @@
 import { useEffect, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import axios from "axios"; // Import Axios for API calls
 import Loaninfo from "./LoanInfo";
 import Chatbot from "./ChatBot";
-
+import { kycstatus } from "../../../FingrowBackend/src/controllers/Kycdata";
 
 function GetLoan() {
-  
   const [amount, setAmount] = useState(5000);
   const [phone, setPhone] = useState("");
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
-  
-
+  const navigate = useNavigate(); // Hook for navigation
 
   useEffect(() => {
-    <Loaninfo amount={amount} totalRepayment={totalRepayment} />
-    
-  }, [count]); 
+    <Loaninfo amount={amount} totalRepayment={totalRepayment} />;
+  }, [count]);
 
-
-  // Calculate total repayment (Assume 10% interest)
+  // Calculate total repayment (Assume 30% interest as per your code)
   const interestRate = 0.3;
   const totalRepayment = Math.round(amount * (1 + interestRate));
 
-  // Calculate repayment date (6 months from today)
+  // Calculate repayment date (1 month from today as per your code)
   const repaymentDate = new Date();
   repaymentDate.setMonth(repaymentDate.getMonth() + 1);
   const formattedDate = repaymentDate.toLocaleDateString("en-GB");
 
-
+  // Function to handle the "Get Cash Today" button click
+  const handleGetCashToday = async () => {
+    try {
+      const response = await axios.post(
+        "/api/v1/users/Kycstatus",
+        { phone: phone },
+        { headers: { "Content-Type": "application/json" } }
+      );
+  
+      console.log("Full API Response:", response.data);
+      const kycStatus = response.data.kycstatus; // Fix: Use kycstatus, not status
+      console.log("kycstatus:", kycStatus);
+  
+      if (kycStatus === "pending") {
+        navigate(`/Basic-verify`, {
+          state: { amount, totalRepayment, repaymentDate: formattedDate },
+        });
+      } else if (kycStatus === "success") {
+        navigate(`/LoanConfirmation`, {
+          state: {
+            amountBorrowed: amount,
+            totalRepayment,
+            repaymentDate: formattedDate,
+            interestRate: `${interestRate * 100}%`,
+          },
+        });
+      } else if (kycStatus === "not_found") {
+        navigate(`/Basic-verify`, {
+          state: { amount, totalRepayment, repaymentDate: formattedDate },
+        });
+        alert("No KYC found. Please complete your KYC.");
+      } else {
+        console.log("Unexpected kycStatus:", kycStatus);
+        alert(`Unexpected KYC status: ${kycStatus || "undefined"}. Please try again.`);
+      }
+    } catch (error) {
+      console.error("Error checking KYC status:", error.response || error.message);
+      alert("Failed to check KYC status. Please try again.");
+    }
+  
+    setCount(count + 1);
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen border p-5">
@@ -94,16 +132,14 @@ function GetLoan() {
           <p className="text-white text-xs text-center mt-2">
             Enter your mobile number
           </p>
-          <Link to={`/Basic-verify?amount=${amount}&totalRepayment=${totalRepayment}`}>        
 
-
+          {/* Replace Link with button to handle API call and navigation */}
           <button
             className="mt-4 bg-white text-blue-600 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-100 transition duration-200"
-            onClick={() => setCount(count + 1)}
+            onClick={handleGetCashToday}
           >
             GET CASH TODAY
           </button>
-          </Link>
 
           <p className="text-white text-xs text-center mt-3">
             By clicking "Get cash today", you agree to the
@@ -112,11 +148,9 @@ function GetLoan() {
           </p>
         </div>
       </div>
-      <Chatbot/>
+      <Chatbot />
     </div>
-    
   );
-
 }
 
 export default GetLoan;

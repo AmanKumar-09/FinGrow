@@ -15,7 +15,7 @@ const Aadhar=()=> {
   const monthlyIncome = searchParams.get("monthlyIncome")
   const email = searchParams.get("email")
   const pan = searchParams.get("pan")
-
+  const repaymentDate = searchParams.get("repaymentDate")
  
 
 
@@ -32,7 +32,7 @@ const Aadhar=()=> {
     }
   };
 
-  const nextPageUrl = `/Bank-verify?amount=${encodeURIComponent(amount)}&totalRepayment=${encodeURIComponent(totalRepayment)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&address=${encodeURIComponent(address)}&monthlyIncome=${encodeURIComponent(monthlyIncome)}&email=${encodeURIComponent(email)}&pan=${encodeURIComponent(pan)}&aadhaar=${encodeURIComponent(aadhaar)}`;
+  const nextPageUrl = `/Bank-verify?amount=${encodeURIComponent(amount)}&totalRepayment=${encodeURIComponent(totalRepayment)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&address=${encodeURIComponent(address)}&monthlyIncome=${encodeURIComponent(monthlyIncome)}&email=${encodeURIComponent(email)}&pan=${encodeURIComponent(pan)}&aadhaar=${encodeURIComponent(aadhaar)}&repaymentDate=${repaymentDate}`;
 
 
   return (
