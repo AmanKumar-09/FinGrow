@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loaninfo from "./LoanInfo";
 import Chatbot from "./ChatBot";
-
+import LoanOptions from "./LoanOptions"; // Import LoanOptions
 
 function GetLoan() {
   const [amount, setAmount] = useState(5000);
   const [phone, setPhone] = useState("");
   const [count, setCount] = useState(0);
+  const [showSuggestions, setShowSuggestions] = useState(false); // State to toggle suggestions
 
   const navigate = useNavigate();
 
@@ -23,15 +24,13 @@ function GetLoan() {
 
   const handleGetCashToday = async () => {
     try {
-      // Remove the country code (e.g., +91) from the phone number
       const phoneWithoutCountryCode = phone.replace(/^\+\d{1,2}/, "");
-
       console.log("Original phone:", phone);
       console.log("Phone without country code:", phoneWithoutCountryCode);
 
       const response = await axios.post(
         "/api/v1/users/Kycstatus",
-        { phone: phoneWithoutCountryCode }, // Send phone without country code
+        { phone: phoneWithoutCountryCode },
         { headers: { "Content-Type": "application/json" } }
       );
 
@@ -39,10 +38,10 @@ function GetLoan() {
       const kycStatus = response.data.message;
       console.log("kycstatus:", kycStatus);
 
-       if (kycStatus === "success") {
+      if (kycStatus === "success") {
         navigate(`/LoanConfirmation`, {
           state: {
-             amount,
+            amount,
             totalRepayment,
             repaymentDate: formattedDate,
             interestRate: `${interestRate * 100}%`,
@@ -50,10 +49,14 @@ function GetLoan() {
         });
       } else {
         navigate(`/Basic-verify`, {
-          state: { amount, totalRepayment, repaymentDate: formattedDate,interestRate: `${interestRate * 100}%`,phone:phoneWithoutCountryCode },
+          state: {
+            amount,
+            totalRepayment,
+            repaymentDate: formattedDate,
+            interestRate: `${interestRate * 100}%`,
+            phone: phoneWithoutCountryCode,
+          },
         });
-        // console.log("Unexpected kycStatus:", kycStatus);
-        // alert(`Unexpected KYC status: ${kycStatus || "undefined"}. Please try again.`);
       }
     } catch (error) {
       console.error("Error checking KYC status:", error.response || error.message);
@@ -63,8 +66,13 @@ function GetLoan() {
     setCount(count + 1);
   };
 
+  const handleSuggest = () => {
+    setShowSuggestions(true); // Show suggestions when button is clicked
+  };
+
   return (
-    <div className="flex justify-center items-center min-h-screen border p-5">
+    <div className="flex flex-col justify-center items-center min-h-screen border p-5">
+      {/* Main Loan Card */}
       <div className="flex flex-col md:flex-row bg-white border border-gray-100 shadow-2xl rounded-3xl overflow-hidden w-[900px] h-auto">
         <div className="p-8 md:w-2/3 flex flex-col justify-center">
           <h2 className="text-3xl font-bold">
@@ -128,6 +136,13 @@ function GetLoan() {
             GET CASH TODAY
           </button>
 
+          <button
+            className="mt-4 bg-white text-blue-600 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-100 transition duration-200"
+            onClick={handleSuggest}
+          >
+            SUGGEST
+          </button>
+
           <p className="text-white text-xs text-center mt-3">
             By clicking "Get cash today", you agree to the
             <a href="#" className="underline"> Terms & Conditions </a> and
@@ -135,6 +150,14 @@ function GetLoan() {
           </p>
         </div>
       </div>
+
+      {/* Suggestions Section */}
+      {showSuggestions && (
+        <div className="mt-6 w-[900px]">
+          <LoanOptions loanAmount={amount} />
+        </div>
+      )}
+
       <Chatbot />
     </div>
   );

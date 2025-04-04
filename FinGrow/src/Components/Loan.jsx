@@ -143,7 +143,6 @@ function Loan() {
         <Chatbot />
       </div>
     </div>
-    <LoanOptions/>
     </>
   );
 }
