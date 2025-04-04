@@ -371,7 +371,7 @@ def financial_dashboard():
 
         # Investment Recommendations
         model_invest = genai.GenerativeModel('gemini-1.5-flash')
-        invest_prompt = f"List 5 affordable Indian stocks I can buy with ₹{savings} savings. Provide the stock ticker symbol (e.g., NSE:RELIANCE) and full name (e.g., Reliance Industries) with approximate prices in INR in the format 'NSE:SYMBOL - Full Name - ₹Price', one per line. No additional text."
+        invest_prompt = f"List 5 affordable Indian stocks I can buy with ₹{savings} savings. Provide the stock ticker symbol (e.g., NSE:RELIANCE) and full name (e.g., Reliance Industries) with approximate prices in INR in the format 'NSE:SYMBOL - Full Name - ₹Price', one per line. No additional text including disclaimers and warnings."
         invest_response = model_invest.generate_content(invest_prompt)
         invest_text = clean_text(invest_response.text) if invest_response and hasattr(invest_response, 'text') else "No recommendations."
         stocks = [stock.strip() for stock in invest_text.split('\n') if stock.strip()]

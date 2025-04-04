@@ -1,9 +1,11 @@
-import React from 'react';
+import React  from 'react';
 import { motion } from 'framer-motion';
 import img3d from '../assets/img/img3d.jpeg';
 import bodyimg2 from "../assets/img/bodyimg2.jpeg";
 import phoneimage from "../assets/img/phoneimage.jpg";
 import { NavLink } from 'react-router-dom';
+import FinancialWorkshopCard from '../Utils/BodyCrousel';
+
 
 // Slide-in effect for images only
 const slideUpVariants = {
@@ -41,7 +43,14 @@ const AnimatedText = ({ text }) => (
 );
 
 const Body = () => {
+
+
   return (
+    <>
+    <div>
+ <FinancialWorkshopCard/>
+
+    </div>
     <div className="max-w-6xl mx-auto px-6 md:px-12 mt-16 space-y-16">
       
       {/* Section 1 */}
@@ -58,7 +67,7 @@ const Body = () => {
         <div className="md:w-1/2 md:text-left space-y-4">
           <AnimatedText text="Empowering Your Financial Growth!" />
           <p className="text-gray-600 text-lg">
-            Take control of your financial future with smart investment insights, instant loan options, and expert financial planning.
+            Take control of your financial future with smart investment insights with AI, instant loan options, and expert financial planning.
           </p>
           <NavLink to={"/KnowMore"} className="inline-block no-underline bg-green-500 hover:bg-green-700 text-white font-semibold px-10 py-2 rounded-2xl text-lg transition-all">
             Know Us
@@ -83,7 +92,7 @@ const Body = () => {
             Financial success starts with a solid plan! Track your income, manage expenses, and discover smart saving opportunities.
           </p>
           <NavLink to={"/FinancialFreedom"} className="inline-block no-underline bg-green-500 hover:bg-green-700 text-white font-semibold px-10 py-2 rounded-2xl text-lg transition-all">
-            Know Us
+            Know More
           </NavLink>
         </div>
       </div>
@@ -117,6 +126,7 @@ const Body = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

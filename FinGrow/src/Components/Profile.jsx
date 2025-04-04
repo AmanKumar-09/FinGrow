@@ -1,7 +1,6 @@
 
 
 
-/// thirs one 
 
 // import React, { useEffect, useState } from "react";
 // import userPhoto from "../assets/img/mentors1.jpg"
@@ -321,7 +320,7 @@ const Profile = ({ isProfileOpen, toggleProfile }) => {
               <div>
                 <h2 className="text-xl font-bold flex items-center">{user.name}</h2>
                 <p className="text-blue-600">{user.email}</p>
-                <p className="text-gray-600">Financial Consultant</p>
+                {/* <p className="text-gray-600">Financial Consultant</p> */}
               </div>
             </div>
 
