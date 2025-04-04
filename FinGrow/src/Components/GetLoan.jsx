@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loaninfo from "./LoanInfo";
 import Chatbot from "./ChatBot";
-import { kycstatus } from "../../../FingrowBackend/src/controllers/Kycdata";
+
 
 function GetLoan() {
   const [amount, setAmount] = useState(5000);
@@ -42,7 +42,7 @@ function GetLoan() {
        if (kycStatus === "success") {
         navigate(`/LoanConfirmation`, {
           state: {
-            amountBorrowed: amount,
+             amount,
             totalRepayment,
             repaymentDate: formattedDate,
             interestRate: `${interestRate * 100}%`,
@@ -50,7 +50,7 @@ function GetLoan() {
         });
       } else {
         navigate(`/Basic-verify`, {
-          state: { amount, totalRepayment, repaymentDate: formattedDate },
+          state: { amount, totalRepayment, repaymentDate: formattedDate,interestRate: `${interestRate * 100}%`,phone:phoneWithoutCountryCode },
         });
         // console.log("Unexpected kycStatus:", kycStatus);
         // alert(`Unexpected KYC status: ${kycStatus || "undefined"}. Please try again.`);
@@ -82,13 +82,13 @@ function GetLoan() {
             <p className="font-bold text-lg">I am borrowing</p>
             <div className="flex justify-between text-gray-500 text-sm">
               <span>₹1,000</span>
-              <span>₹20,000</span>
+              <span>₹40,000</span>
             </div>
             <input
               type="range"
               min="1000"
               max="40000"
-              step="1000"
+              step="500"
               value={amount}
               onChange={(e) => setAmount(parseInt(e.target.value))}
               className="w-full mt-1 accent-blue-600 cursor-pointer"
