@@ -17,7 +17,7 @@ const Header = ({ toggleProfile, isProfileOpen }) => {
     { name: "Loan", route: "/loan" },
     { name: "Trends", route: "/trends" },
     { name: "Financial Planning", route: "/FinancialFreedom" },
-    { name: "Goal Tracker", route: "/GoalSavingPlanner" },
+    { name: "Dashboard", route: "/GoalSavingPlanner" },
     { name: "Suggestion", route: "/suggestion" },
     ...(isAuthenticated ? [] : [{ name: "Sign-Up", route: "/signup" }]), // Conditionally include Sign-Up link
   ];
