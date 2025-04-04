@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 import Loaninfo from "./LoanInfo";
 import Progressbar from "./ProgressBar";
 import { useSearchParams } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 const UserForm=()=> {
-   
+  const location = useLocation();
   const [searchParams] = useSearchParams();
-  const amount = searchParams.get("amount");
-  const totalRepayment = searchParams.get("totalRepayment");
+  const { amount, totalRepayment, repaymentDate,interestRate,phone } = location.state || {};
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
   const [monthlyIncome, setMonthlyIncome] = useState("");
+  const [email,setemail] = useState("")
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
@@ -25,6 +25,8 @@ const UserForm=()=> {
       // Proceed to next step
     }
   };
+
+  const nextPageUrl = `/Pan-Verify?amount=${encodeURIComponent(amount)}&totalRepayment=${encodeURIComponent(totalRepayment)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&address=${encodeURIComponent(address)}&monthlyIncome=${encodeURIComponent(monthlyIncome)}&email=${encodeURIComponent(email)}&repaymentDate=${repaymentDate}&interestRate=${interestRate}&phone=${phone}`;
 
   return (
     <div className="flex flex-col items-center min-h-screen p-5">
@@ -40,7 +42,8 @@ const UserForm=()=> {
             { label: "First Name", value: firstName, setValue: setFirstName },
             { label: "Last Name", value: lastName, setValue: setLastName },
             { label: "Address", value: address, setValue: setAddress },
-            { label: "Monthly Income", value: monthlyIncome, setValue: setMonthlyIncome }
+            { label: "Monthly Income", value: monthlyIncome, setValue: setMonthlyIncome },
+            {label: "Email",value:email,setValue:setemail}
           ].map((field, index) => (
             <div key={index} className="mb-4">
               <label className="block font-bold mb-1">{field.label}:</label>
@@ -66,7 +69,7 @@ const UserForm=()=> {
             </button>
             </Link>
             {/* <Link to="/Pan-Verify"> */}
-            <Link to={`/Pan-Verify?amount=${amount}&totalRepayment=${totalRepayment}`}>
+            <Link to={nextPageUrl}>
             <button
               type="submit"
               className="bg-blue-500 text-white px-[150px] py-4 rounded-full transition hover:bg-blue-700 mt-[70px] mb-[60px]"

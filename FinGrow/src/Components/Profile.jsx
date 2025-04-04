@@ -201,7 +201,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 // Register Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Profile = ({ isProfileOpen, toggleProfile }) => {
+const Profile = ({ isProfileOpen, toggleProfile, name , email }) => {
   const [user, setUser] = useState(null);
   const [timeSpentData, setTimeSpentData] = useState(null);
 

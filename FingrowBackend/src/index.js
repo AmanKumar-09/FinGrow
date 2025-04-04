@@ -13,7 +13,7 @@ app.get('/login', (req, res) => {
 
 connectdb()
     .then(() => {
-        app.listen(process.env.PORT || 5000, () => {
+        app.listen(process.env.PORT || 4000, () => {
             console.log(`App is listening on port ${process.env.PORT || 5000}`);
         });
     })
