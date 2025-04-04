@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Loaninfo from './LoanInfo';
 import Progressbar from './ProgressBar';
@@ -11,17 +11,19 @@ const BankDetails = () => {
   
   const amount = searchParams.get("amount") || "50000";
   const totalRepayment = searchParams.get("totalRepayment") || "55000";
-  const firstName = searchParams.get("firstName") || "Nikhiil";
-  const lastName = searchParams.get("lastName") || "Kumarar";
-  const address = searchParams.get("address") || "1232 civil city, Ludhiana, Punjab, India, 141000";
-  const monthlyIncome = Number(searchParams.get("monthlyIncome") || "70000");
-  const email = searchParams.get("email") || "Nikhiil.doe@example.com";
-  const panid = searchParams.get("pan") || "ABCDE1890F";
-  const aadhaarid = searchParams.get("aadhaar") || "123450227092";
-  const repaymentDate = searchParams.get("repaymentDate")
+  const firstName = searchParams.get("firstName") || "John";
+  const lastName = searchParams.get("lastName") || "Doe";
+  const address = searchParams.get("address") || "123 Main St, Mumbai, Maharashtra, India, 400001";
+  const monthlyIncome = Number(searchParams.get("monthlyIncome") || "60000");
+  const email = searchParams.get("email") || "john.doe@example.com";
+  const panid = searchParams.get("pan") || "ABCDE1234F";
+  const aadhaarid = searchParams.get("aadhaar") || "123456789012";
+  const interestRate = searchParams.get("interestRate") || "10%";
+  const repaymentDate = searchParams.get("repaymentDate") || "2023-12-31";
+  const phone = searchParams.get("phone") || "9876543210";
 
-  const [accountno, setAccountNumber] = useState("103422707012");
-  const [IFSCcode, setIfscCode] = useState("HDFC0001028");
+  const [accountno, setAccountNumber] = useState("123456789012");
+  const [IFSCcode, setIfscCode] = useState("HDFC0001234");
   const [bankname, setBankName] = useState("HDFC Bank");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +60,7 @@ const BankDetails = () => {
       IFSCcode,
       bankname,
       email,
-      phone: "9876543210"
+      phone
     };
 
     try {
@@ -68,7 +70,10 @@ const BankDetails = () => {
         headers: { "Content-Type": "application/json" }
       });
       console.log('KYC submission successful:', response.data);
-      navigate('/');
+      navigate(`/LoanConfirmation`, {
+        state: { amount, totalRepayment, repaymentDate,interestRate},
+      });
+      // navigate('/LoanConfirmation');
     } catch (error) {
       console.error('Error submitting KYC:', error.response?.data?.message || error.message);
       setError(error.response?.data?.message || 'Failed to submit details. Please try again.');
@@ -118,13 +123,13 @@ const BankDetails = () => {
                 Back
               </button>
             </Link>
-            <NavLink 
-              to="/LoanConfirmation?amount=${amount}&totalRepayment=${totalRepayment}"
+            <button 
+              type="submit" 
               className="px-8 py-4 bg-blue-500 text-white rounded-full transition hover:bg-blue-700 disabled:bg-blue-300"
               disabled={isLoading}
             >
               {isLoading ? 'Submitting...' : 'Submit'}
-            </NavLink>
+            </button>
           </div>
         </form>
       </div>

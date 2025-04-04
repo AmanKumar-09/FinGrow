@@ -1,18 +1,20 @@
 import React from 'react';
 import { useSearchParams } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 const LoanConfirmation = () => {
   // Sample loan data (you can fetch this dynamically based on user input and CIBIL score)
-
-  const [searchParams] = useSearchParams();
-  const amount = searchParams.get("amount");
-  const totalRepayment = searchParams.get("totalRepayment");
-  const repaymentDate = searchParams.get("repaymentDate")
-  const loanDetails = {
-    amountBorrowed: 5000, // ₹1,000 as selected in the image
-    totalRepayment: 6500, // ₹6,500 as shown in the image
-    repaymentDate: '03/05/2025', // Repayment date from the image
-    interestRate: '150%', // Example interest rate (adjust based on your logic)
-  };
+  const location = useLocation();
+//   const [searchParams] = useSearchParams();
+//   const amount = searchParams.get("amount");
+//   const totalRepayment = searchParams.get("totalRepayment");
+//   const repaymentDate = searchParams.get("repaymentDate")
+const { amount, totalRepayment, repaymentDate,interestRate } = location.state || {};
+//   const loanDetails = {
+//     amountBorrowed: 5000, // ₹1,000 as selected in the image
+//     totalRepayment: 6500, // ₹6,500 as shown in the image
+//     repaymentDate: '03/05/2025', // Repayment date from the image
+//     interestRate: '150%', // Example interest rate (adjust based on your logic)
+//   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
@@ -36,7 +38,7 @@ const LoanConfirmation = () => {
           </div>
           <div className="flex justify-between">
             <span className="text-gray-700">Interest Rate:</span>
-            <span className="font-semibold">{loanDetails.interestRate}</span>
+            <span className="font-semibold">{interestRate}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-700">Repayment Date:</span>

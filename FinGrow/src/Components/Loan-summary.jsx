@@ -19,6 +19,8 @@ const LoanForm =()=> {
   const address = searchParams.get("address")
   const monthlyIncome = searchParams.get("monthlyIncome")
   const email = searchParams.get("email")
+  const interestRate = searchParams.get("interestRate")
+  const phone = searchParams.get("phone")
   const repaymentDate = searchParams.get("repaymentDate")
  
 
@@ -35,7 +37,7 @@ const LoanForm =()=> {
     }
   };
 
-  const nextPageUrl = `/Aadhar-verify?amount=${encodeURIComponent(amount)}&totalRepayment=${encodeURIComponent(totalRepayment)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&address=${encodeURIComponent(address)}&monthlyIncome=${encodeURIComponent(monthlyIncome)}&email=${encodeURIComponent(email)}&pan=${encodeURIComponent(pan)}&repaymentDate=${repaymentDate}`;
+  const nextPageUrl = `/Aadhar-verify?amount=${encodeURIComponent(amount)}&totalRepayment=${encodeURIComponent(totalRepayment)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&address=${encodeURIComponent(address)}&monthlyIncome=${encodeURIComponent(monthlyIncome)}&email=${encodeURIComponent(email)}&pan=${encodeURIComponent(pan)}&repaymentDate=${repaymentDate}&interestRate=${interestRate}&phone=${phone}`;
 
 
   return (
