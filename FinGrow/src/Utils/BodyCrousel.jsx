@@ -82,6 +82,7 @@
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import bodypick from '../assets/img/bodypick.jpg'; // Replace with your image path
+import { NavLink } from 'react-router-dom';
 
 const FinancialWorkshopCard = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -121,14 +122,16 @@ const FinancialWorkshopCard = () => {
               </span>
               <div className="h-0.5 w-8 md:w-12 bg-gradient-to-r from-purple-500 to-pink-500"></div>
             </div> */}
-            <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
-              Financial Analysis <br /> Meeting.
+            <h1 className="text-3xl mb-4 md:text-5xl font-bold text-white leading-tight">
+              {/* Financial Analysis <br /> Meeting. */}
+              Save Smart Invest Wisely Borrow Easily 
             </h1>
-            <button
-              className="px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-green-500 to-green-500 text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+            <NavLink
+            to={"/KnowMore"}
+              className="px-8 py-2  no-underline md:px-6 md:py-3 bg-gradient-to-r from-yellow-300 to-yellow-200 text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
-              Buy Now
-            </button>
+              Know Us
+            </NavLink>
           </div>
 
           {/* Right Side Image */}

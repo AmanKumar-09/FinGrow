@@ -3,15 +3,14 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Loaninfo from "./LoanInfo";
-import Chatbot from "./ChatBot";
 import LoanOptions from "./LoanOptions"; // Import LoanOptions
+import Chatbot from "./ChatBot";
 
 function GetLoan() {
   const [amount, setAmount] = useState(5000);
   const [phone, setPhone] = useState("");
   const [count, setCount] = useState(0);
-  const [showSuggestions, setShowSuggestions] = useState(false); // State to toggle suggestions
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   const navigate = useNavigate();
 
@@ -67,7 +66,7 @@ function GetLoan() {
   };
 
   const handleSuggest = () => {
-    setShowSuggestions(true); // Show suggestions when button is clicked
+    setShowSuggestions(true);
   };
 
   return (
@@ -104,12 +103,12 @@ function GetLoan() {
             <p className="text-right font-bold text-xl">₹{amount.toLocaleString()}</p>
           </div>
 
-          <div className="mt-4 text-gray-600 text-sm grid grid-cols-2 gap-4">
+          {/* <div className="mt-4 text-gray-600 text-sm grid grid-cols-2 gap-4">
             <p className="font-bold">Total repayment</p>
             <p className="font-bold text-right">Repayment date</p>
             <p className="font-semibold text-lg text-black">₹{totalRepayment.toLocaleString()}</p>
             <p className="font-semibold text-lg text-right text-black">{formattedDate}</p>
-          </div>
+          </div> */}
         </div>
 
         <div className="bg-blue-600 p-8 md:w-1/3 flex flex-col justify-center items-center rounded-r-3xl">
@@ -129,12 +128,12 @@ function GetLoan() {
             Enter your mobile number
           </p>
 
-          <button
+          {/* <button
             className="mt-4 bg-white text-blue-600 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-100 transition duration-200"
             onClick={handleGetCashToday}
           >
             GET CASH TODAY
-          </button>
+          </button> */}
 
           <button
             className="mt-4 bg-white text-blue-600 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-gray-100 transition duration-200"
@@ -154,7 +153,16 @@ function GetLoan() {
       {/* Suggestions Section */}
       {showSuggestions && (
         <div className="mt-6 w-[900px]">
-          <LoanOptions loanAmount={amount} />
+          <LoanOptions
+            loanAmount={amount}
+            phone={phone}
+            navigate={navigate} // Pass navigate function
+            amount={amount}
+            totalRepayment={totalRepayment}
+            repaymentDate={repaymentDate}
+            interestRate={interestRate}
+            formattedDate={formattedDate}
+          />
         </div>
       )}
 

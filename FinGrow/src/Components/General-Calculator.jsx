@@ -151,7 +151,7 @@ const GeneralCalculator = () => {
             className="w-full mt-3"
           />
            <div className="flex justify-between text-sm text-gray-600">
-            <span>6</span> <span>12</span> <span>24</span> <span>36</span> <span>48</span> <span>60</span> 
+            <span>1</span> <span>2</span> <span>4</span> <span>6</span> <span>8</span> <span>10</span> 
           </div>
         </div>
       </div>

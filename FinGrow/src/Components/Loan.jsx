@@ -97,7 +97,7 @@ function Loan() {
             </ul>
             <NavLink
               to="/loan/get-loan"
-              className="mt-8 inline-block bg-blue-600 text-white font-semibold py-3 px-8 rounded-full hover:bg-blue-700 transition-colors duration-300"
+              className="mt-8 inline-block no-underline bg-blue-600 text-white font-semibold py-3 px-8 rounded-full hover:bg-blue-700 transition-colors duration-300"
             >
               Get Loan Now
             </NavLink>
@@ -130,7 +130,7 @@ function Loan() {
             </ul>
             <NavLink
               to="/loan/provide-loan"
-              className="mt-8 inline-block bg-green-600 text-white font-semibold py-3 px-8 rounded-full hover:bg-green-700 transition-colors duration-300"
+              className="mt-8 inline-block no-underline bg-green-600 text-white font-semibold py-3 px-8 rounded-full hover:bg-green-700 transition-colors duration-300"
             >
               Give Loan Now
             </NavLink>
