@@ -11,16 +11,17 @@ import GeneralCalculator from './General-Calculator.jsx'
 function Home() {
   return (
     <>
-     
-     <Body/>
-     <Carousel/>
-     <GeneralCalculator/>
-     <News/>
-     
-     <Faq/>
-     <Chatbot/>
-     
-     </>
+      <div className=' bg-[#ffffe6] '>
+
+        <Body />
+        <Carousel />
+        <GeneralCalculator />
+        <News />
+
+        <Faq />
+        <Chatbot />
+      </div>
+    </>
   )
 }
 

@@ -73,7 +73,7 @@ function News() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center py-10 bg-gray-100">
+    <div className="flex flex-col items-center justify-center py-10 bg-[ #ffffe6]">
       <div className="mb-8 font-bold text-3xl text-yellow-500">FinGrow in News</div>
 
       {/* Scrollable Wrapper */}
