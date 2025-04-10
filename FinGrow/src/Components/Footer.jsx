@@ -2,7 +2,7 @@ import { FaGooglePlay, FaApple, FaLinkedin, FaInstagram, FaFacebook, FaYoutube, 
 import fingrow from '../assets/img/fingrow.png'
  function Footer() {
   return (
-    <footer className="bg-gray-100 py-10 px-5 md:px-20 text-gray-700">
+    <footer className="bg-[#ffffe6] py-10 px-5 md:px-20 text-gray-700">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Logo and Download */}
         <div>

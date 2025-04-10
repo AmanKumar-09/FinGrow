@@ -11,7 +11,7 @@ import GeneralCalculator from './General-Calculator.jsx'
 function Home() {
   return (
     <>
-      <div className=' bg-[#ffffe6] '>
+      <div className=' '>
 
         <Body />
         <Carousel />
