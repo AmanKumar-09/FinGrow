@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Expanded dummy data with more lenders
 const dummyLenders = [
-  { name: 'John Doe', amount: 5000, rate: 5 },
+  { name: 'John Doe', amount: 5000, rate: 5},
   { name: 'Jane Smith', amount: 10000, rate: 6 },
   { name: 'Alex Johnson', amount: 3000, rate: 4.5 },
   { name: 'Sarah Williams', amount: 2000, rate: 4 },
