@@ -1,64 +1,5 @@
-// import { useState } from "react";
-// import Chatbot from "./ChatBot";
-
-// const ProvideLoan = () => {
-//   const [amount, setAmount] = useState("");
-//   const [interest, setInterest] = useState("");
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log("Loan Amount:", amount, "Interest Rate:", interest);
-//   };
-
-//   return (
-//     <div className="flex justify-center items-center min-h-screen ">
-//       <div className="bg-white p-6 rounded-2xl shadow-lg max-w-md w-full">
-//         <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">
-//           Offer a Loan
-//         </h2>
-//         <form onSubmit={handleSubmit} className="space-y-4">
-//           <div>
-//             <label className="block text-gray-700 font-medium mb-2">
-//               Loan Amount
-//             </label>
-//             <input
-//               type="number"
-//               value={amount}
-//               onChange={(e) => setAmount(e.target.value)}
-//               placeholder="Enter amount"
-//               className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-//               required
-//             />
-//           </div>
-//           <div>
-//             <label className="block text-gray-700 font-medium mb-2">
-//               Interest Rate (%)
-//             </label>
-//             <input
-//               type="number"
-//               value={interest}
-//               onChange={(e) => setInterest(e.target.value)}
-//               placeholder="Enter interest rate"
-//               className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-//               required
-//             />
-//           </div>
-//           <button
-//             type="submit"
-//             className="w-full bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition"
-//           >
-//             Submit Loan Offer
-//           </button>
-//         </form>
-//       </div>
-//       <Chatbot/>
-//     </div>
-//   );
-// };
-
-// export default ProvideLoan;
-import { useState } from "react";
-import axios from "axios"; // Make sure to install axios: npm install axios
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Chatbot from "./ChatBot";
 
 const ProvideLoan = () => {
@@ -68,9 +9,62 @@ const ProvideLoan = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [amountError, setAmountError] = useState(null);
+  const [interestError, setInterestError] = useState(null);
+
+  const MAX_AMOUNT = 40000;
+
+  const getMaxAllowedInterest = (loanAmount) => {
+    if (loanAmount < 10000) return 12;
+    else if (loanAmount >= 10000 && loanAmount <= 24999) return 11;
+    else if (loanAmount >= 25000 && loanAmount <= 39999) return 10;
+    else return 9;
+  };
+
+  useEffect(() => {
+    const loanAmount = Number(amount);
+    const enteredInterest = Number(interest);
+
+    if (!isNaN(loanAmount) && loanAmount > 0) {
+      if (loanAmount > MAX_AMOUNT) {
+        setAmountError("Maximum allowed amount is ₹40,000.");
+      } else {
+        setAmountError(null);
+      }
+
+      const maxAllowed = getMaxAllowedInterest(loanAmount);
+      if (!isNaN(enteredInterest) && enteredInterest > maxAllowed) {
+        setInterestError(
+          `Interest rate cannot exceed ${maxAllowed}% for ₹${loanAmount.toLocaleString()}.`
+        );
+      } else {
+        setInterestError(null);
+      }
+    } else {
+      setAmountError(null);
+      setInterestError(null);
+    }
+  }, [amount, interest]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const loanAmount = Number(amount);
+    const enteredInterest = Number(interest);
+    const maxAllowedInterest = getMaxAllowedInterest(loanAmount);
+
+    if (loanAmount > MAX_AMOUNT) {
+      setError("Amount exceeds the maximum allowed limit of ₹40,000.");
+      return;
+    }
+
+    if (enteredInterest > maxAllowedInterest) {
+      setError(
+        `Interest rate cannot exceed ${maxAllowedInterest}% for ₹${loanAmount.toLocaleString()}.`
+      );
+      return;
+    }
+
     setLoading(true);
     setError(null);
     setSuccess(null);
@@ -78,12 +72,11 @@ const ProvideLoan = () => {
     try {
       const response = await axios.post("/api/v1/users/createoffer", {
         name,
-        loanAmount: Number(amount), // Convert to number
-        interestRate: Number(interest), // Convert to number
+        loanAmount,
+        interestRate: enteredInterest,
       });
 
       setSuccess("Loan offer created successfully!");
-      // Clear form after successful submission
       setName("");
       setAmount("");
       setInterest("");
@@ -99,13 +92,12 @@ const ProvideLoan = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen ">
+    <div className="flex justify-center items-center min-h-screen">
       <div className="bg-white p-6 rounded-2xl shadow-lg max-w-md w-full">
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-4">
           Offer a Loan
         </h2>
-        
-        {/* Success/Error Messages */}
+
         {success && (
           <div className="mb-4 p-2 bg-green-100 text-green-700 rounded">
             {success}
@@ -118,7 +110,6 @@ const ProvideLoan = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-
           <div>
             <label className="block text-gray-700 font-medium mb-2">
               Loan Amount
@@ -128,10 +119,18 @@ const ProvideLoan = () => {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               placeholder="Enter amount"
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                amountError
+                  ? "border-red-500 focus:ring-red-400"
+                  : "focus:ring-blue-400"
+              }`}
               required
             />
+            {amountError && (
+              <p className="text-red-500 text-sm mt-1">{amountError}</p>
+            )}
           </div>
+
           <div>
             <label className="block text-gray-700 font-medium mb-2">
               Interest Rate (%)
@@ -141,15 +140,27 @@ const ProvideLoan = () => {
               value={interest}
               onChange={(e) => setInterest(e.target.value)}
               placeholder="Enter interest rate"
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className={`w-full p-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                interestError
+                  ? "border-red-500 focus:ring-red-400"
+                  : "focus:ring-blue-400"
+              }`}
               required
             />
+            {interestError && (
+              <p className="text-red-500 text-sm mt-1">{interestError}</p>
+            )}
+            <small className="text-gray-500">
+              Max allowed for this amount:{" "}
+              {amount && !amountError && `${getMaxAllowedInterest(Number(amount))}%`}
+            </small>
           </div>
+
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !!amountError || !!interestError}
             className={`w-full p-2 rounded-lg text-white transition ${
-              loading
+              loading || amountError || interestError
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-green-500 hover:bg-green-600"
             }`}
@@ -163,4 +174,4 @@ const ProvideLoan = () => {
   );
 };
 
-export default ProvideLoan;
+export default ProvideLoan;
