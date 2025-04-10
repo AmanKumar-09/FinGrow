@@ -7,19 +7,20 @@ import Faq from '../Utils/Faq.jsx'
 import News from './News.jsx'
 import Chatbot from './ChatBot.jsx'
 import GeneralCalculator from './General-Calculator.jsx'
+import MouseFollower from './MouseFollower.jsx' // Already imported
 
 function Home() {
   return (
     <>
-      <div className=' '>
-
+      <MouseFollower />
+      <div className=''>
         <Body />
         <Carousel />
         <GeneralCalculator />
         <News />
-
         <Faq />
         <Chatbot />
+        <Footer />
       </div>
     </>
   )

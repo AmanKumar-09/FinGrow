@@ -53,10 +53,14 @@ import Crousal from '../Utils/Crousal';
 import { NavLink } from 'react-router-dom';
 import Chatbot from './ChatBot';
 import LoanOptions from './LoanOptions';
+import SimpleMouseFollower from './SimpleMouseFollower';
+
 
 function Loan() {
+
   return (
     <>
+    <SimpleMouseFollower/>
     <div className="min-h-screen bg-gray-100 pb-16">
       {/* Carousel Section */}
       <section className="mb-12">

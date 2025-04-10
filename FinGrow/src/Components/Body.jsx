@@ -6,7 +6,6 @@ import phoneimage from "../assets/img/phoneimage.jpg";
 import { NavLink } from 'react-router-dom';
 import FinancialWorkshopCard from '../Utils/BodyCrousel';
 
-
 // Slide-in effect for images only
 const slideUpVariants = {
   hidden: { opacity: 0, y: 80 },
@@ -22,37 +21,53 @@ const letterVariants = {
   hidden: { opacity: 0 },
   visible: (index) => ({
     opacity: 1,
-    transition: { delay: index * 0.05 } // Delay each letter for effect
+    transition: { delay: index * 0.05 }
   })
 };
 
-// Animated text component (keeps letter animation)
-const AnimatedText = ({ text }) => (
-  <motion.h1
-    className="text-4xl font-bold text-gray-900 leading-snug"
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: false, amount: 0.3 }}
-  >
-    {text.split("").map((char, index) => (
-      <motion.span key={index} custom={index} variants={letterVariants}>
-        {char}
-      </motion.span>
-    ))}
-  </motion.h1>
-);
+// Updated AnimatedText component with consistent word spacing
+const AnimatedText = ({ text }) => {
+  // Split text into words and preserve spaces
+  const words = text.split(" ");
+  
+  return (
+    <motion.h1
+      className="text-4xl font-bold text-gray-900 leading-snug"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.3 }}
+      data-animated-text
+      style={{ position: 'relative', display: 'inline-block' }}
+    >
+      {words.map((word, wordIndex) => (
+        <span key={wordIndex} className="inline-block">
+          {word.split("").map((char, charIndex) => (
+            <motion.span
+              key={charIndex}
+              custom={wordIndex * word.length + charIndex} // Unique index for animation
+              variants={letterVariants}
+              style={{ display: 'inline-block' }}
+            >
+              {char}
+            </motion.span>
+          ))}
+          {/* Add space after each word except the last */}
+          {wordIndex < words.length - 1 && (
+            <span className="inline-block w-2" /> // Consistent 0.5rem (8px) space
+          )}
+        </span>
+      ))}
+    </motion.h1>
+  );
+};
 
 const Body = () => {
-
-
   return (
     <>
       <div>
         <FinancialWorkshopCard />
-
       </div>
-      <div className="max-w-6xl  mx-auto px-6 md:px-12 mt-16 space-y-16">
-
+      <div className="max-w-6xl mx-auto px-6 md:px-12 mt-16 space-y-16">
         {/* Section 1 */}
         <div className="flex flex-col md:flex-row items-center gap-16">
           <motion.div
