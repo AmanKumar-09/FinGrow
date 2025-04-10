@@ -12,6 +12,7 @@ import {
   Cell,
   Legend,
 } from "recharts";
+import SimpleMouseFollower from "../Components/SimpleMouseFollower";
 
 // Sample data for the dashboard
 const financialData = {
@@ -39,6 +40,7 @@ const profitLossData = [
 const PieChartComponent = ({ data }) => {
   return (
     <div className="flex  items-center gap-6">
+      <SimpleMouseFollower/>
       <ResponsiveContainer width={250} height={250}>
         <PieChart>
           <Pie
