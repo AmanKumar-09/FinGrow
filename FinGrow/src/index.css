@@ -28,3 +28,7 @@ body {
     animation: spin-border 4s linear infinite;
   }
   
+
+  body {
+    padding-top: 128px; 
+  }
