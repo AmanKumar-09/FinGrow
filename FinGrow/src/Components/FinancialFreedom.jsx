@@ -54,6 +54,7 @@ const financialPoints = [
 const FinancialFreedom = () => {
   return (
     <>
+    <FinancialAdvise/>
     
     <div className="flex flex-col md:flex-row items-center justify-center  p-6 md:p-12 my-4 max-w-5xl mx-auto ">
       {/* Left Section */}
