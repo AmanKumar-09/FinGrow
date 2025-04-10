@@ -1,6 +1,7 @@
 import React from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import SimpleMouseFollower from "./SimpleMouseFollower";
 
 
 
@@ -52,7 +53,7 @@ const financialPoints = [
 const FinancialFreedom = () => {
   return (
     <>
-    
+    <SimpleMouseFollower/>
     <div className="flex flex-col md:flex-row items-center justify-center  p-6 md:p-12 my-4 max-w-5xl mx-auto ">
       {/* Left Section */}
       <div className="md:w-1/2 flex flex-col items-center md:items-start  mr-6  md:text-left">

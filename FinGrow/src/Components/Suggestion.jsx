@@ -193,6 +193,7 @@
 // export default FinancialDashboard;
 import { useState, useEffect } from "react";
 import { AdvancedRealTimeChart } from "react-ts-tradingview-widgets";
+import SimpleMouseFollower from "./SimpleMouseFollower";
 
 const FinancialDashboard = () => {
   const [salary, setSalary] = useState("");
@@ -236,6 +237,7 @@ const FinancialDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
+      <SimpleMouseFollower/>
       {/* Header */}
       <header className="bg-gradient-to-r from-green-500 to-green-700 text-white py-6 text-center">
         <h1 className="text-3xl font-bold flex items-center justify-center">

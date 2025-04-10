@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import SimpleMouseFollower from "./SimpleMouseFollower";
 
 const TradingViewWidgets = () => {
   useEffect(() => {
@@ -63,6 +64,7 @@ const TradingViewWidgets = () => {
 
   return (
     <div>
+      <SimpleMouseFollower/>
       {/* Finlogix Market Widget */}
       <div className="finlogix-container w-full bg-gray-100 shadow-lg rounded-lg mt-1 px-0 py-0">
           <iframe
